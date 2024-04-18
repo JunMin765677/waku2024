@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <%- include('shared/head') %>
+
+    <meta name="application-name" content="WakuStudio">
+    <meta property="og:site_name" content="WakuStudio">
+    <meta name="author" content="WakuStudio">
+    <meta property="article:author" content="https://wakudesign.com">
+  
+    <title><%= article.title %>-Waku</title>
+  
+    <meta name="description">
+    <meta name="keywords" content="<%= article.categories %>">
+    <meta name="url" itemprop="url" content="https://wakudesign.com/article/<%= article.id %>">
+    <meta property="og:url"                content="https://wakudesign.com/article/<%= article.id %>" />
+    <meta property="og:type"               content="website" />
+    <meta property="og:title"              content="<%= article.title %>-Waku" />
+    <meta property="og:description" />
+    <link rel="canonical" href="https://wakudesign.com/article/<%= article.id %>">
+
+
+    <meta property="og:image"              content="<%= article.cover %>" />
+    <meta property="og:image:width"        content="600" />
+    <meta property="og:image:height"       content="600" />
+  
+    <style>
+      body {
+          font-family: 'Noto Sans TC',sans-serif !important;
+          font-weight: 600;
+      }
+      pre {
+        background-color: #f4f4f4; /* 設置背景色 */
+        border: 1px solid #ddd; /* 加上邊框 */
+        border-left: 3px solid #d8b065; /* 左邊加上一條顯眼的邊框以突出顯示 */
+        color: #666; /* 文字顏色 */
+        page-break-inside: avoid;
+        font-size: 18px; /* 字體大小 */
+        line-height: 1.6; /* 行高 */
+        margin-bottom: 1.6em; /* 下邊距 */
+        max-width: 100%; /* 最大寬度，防止溢出 */
+        overflow: auto; /* 如果內容超出預設寬高，顯示滾動條 */
+        padding: 1em; /* 內距 */
+        display: block; /* 將 <pre> 元素顯示為塊級元素 */
+        word-wrap: break-word; /* 如果單詞太長，允許自動換行 */
+        white-space: pre-wrap; /* 保持空白區域，並允許自動換行 */
+      }
+    </style>
+  
+  </head>
+  <body>
+    
+    <%- include('shared/nav') %>
+    
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('waku/images/image_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">Waku Piece</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="/blog">Blog <i class="ion-ios-arrow-forward"></i></a></span> <span>Waku Piece <i class="ion-ios-arrow-forward"></i></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <h2 class="mb-3"><b><%= article.title %></b></h2>
+            <%= article.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) %>
+            <p>
+              <img src="<%= article.cover %>" alt="" class="img-fluid">
+            </p>
+            <%- article.content %>
+            
+            <div class="tag-widget post-tag-container mb-5 mt-5">
+              <div class="tagcloud">
+                <a href="/" class="tag-cloud-link"><%= article.categories %></a>
+              </div>
+            </div>
+              <!-- Author01 -->
+              <div class="about-author d-flex p-4 bg-light">
+                <div class="bio mr-5">
+                  <img src="waku/images/Jun.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                </div>
+                <div class="desc">
+                    <h3>Jun Min</h3>
+                    <p>"我是一個勇於挑戰、熱愛創新的網頁全端工程師，除了扎實的技術能力,我更願意從同理心出發,設身處地思考問題,換位思考用戶和團隊成員的需求。待人處事謙和有禮,熱誠以懷。與此同時,我亦重視清晰的溝通與協作,能高效整合多方資源,共同完成目標。"</p>
+                </div>
+              </div>
+              <!-- Author01 End -->
+
+            <!-- Comment -->
+            <!-- <div class="pt-5 mt-5">
+              <h3 class="mb-5 h4 font-weight-bold">6 Comments</h3>
+              <ul class="comment-list">
+                <li class="comment">
+                  <div class="vcard bio">
+                    <img src="images/person_1.jpg" alt="Image placeholder">
+                  </div>
+                  <div class="comment-body">
+                    <h3>John Doe</h3>
+                    <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p><a href="#" class="reply">Reply</a></p>
+                  </div>
+                </li>
+
+                <li class="comment">
+                  <div class="vcard bio">
+                    <img src="images/person_1.jpg" alt="Image placeholder">
+                  </div>
+                  <div class="comment-body">
+                    <h3>John Doe</h3>
+                    <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p><a href="#" class="reply">Reply</a></p>
+                  </div>
+
+                  <ul class="children">
+                    <li class="comment">
+                      <div class="vcard bio">
+                        <img src="images/person_1.jpg" alt="Image placeholder">
+                      </div>
+                      <div class="comment-body">
+                        <h3>John Doe</h3>
+                        <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                        <p><a href="#" class="reply">Reply</a></p>
+                      </div>
+
+
+                      <ul class="children">
+                        <li class="comment">
+                          <div class="vcard bio">
+                            <img src="images/person_1.jpg" alt="Image placeholder">
+                          </div>
+                          <div class="comment-body">
+                            <h3>John Doe</h3>
+                            <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                            <p><a href="#" class="reply">Reply</a></p>
+                          </div>
+
+                            <ul class="children">
+                              <li class="comment">
+                                <div class="vcard bio">
+                                  <img src="images/person_1.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                  <h3>John Doe</h3>
+                                  <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
+                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                  <p><a href="#" class="reply">Reply</a></p>
+                                </div>
+                              </li>
+                            </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="comment">
+                  <div class="vcard bio">
+                    <img src="images/person_1.jpg" alt="Image placeholder">
+                  </div>
+                  <div class="comment-body">
+                    <h3>John Doe</h3>
+                    <div class="meta mb-2">January 03, 2019 at 2:21pm</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <p><a href="#" class="reply">Reply</a></p>
+                  </div>
+                </li>
+              </ul>
+              END comment-list
+              
+              <div class="comment-form-wrap pt-5">
+                <h3 class="mb-5 h4 font-weight-bold">Leave a comment</h3>
+                <form action="#" class="p-5 bg-light">
+                  <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="website">Website</label>
+                    <input type="url" class="form-control" id="website">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                  </div>
+
+                </form>
+              </div>
+            </div> -->
+          </div> 
+          <!-- .col-md-8 -->
+
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon icon-search"></span>
+                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                </div>
+              </form>
+            </div>
+            <!-- <div class="sidebar-box ftco-animate">
+            	<h3>Category</h3>
+              <ul class="categories">
+                <li><a href="#">Interior Design <span>(6)</span></a></li>
+                <li><a href="#">Exterior Design <span>(8)</span></a></li>
+                <li><a href="#">Industrial Design <span>(2)</span></a></li>
+                <li><a href="#">Landscape Design <span>(2)</span></a></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Popular Articles</h3>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-21 mb-4 d-flex">
+                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                <div class="text">
+                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta">
+                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
+                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Tag Cloud</h3>
+              <ul class="tagcloud m-0 p-0">
+                <a href="#" class="tag-cloud-link">網頁後端開發</a>
+                <a href="#" class="tag-cloud-link">網頁前端設計</a>
+                <a href="#" class="tag-cloud-link">SEO</a>
+                <a href="#" class="tag-cloud-link">ChatGPT</a>
+                <a href="#" class="tag-cloud-link">語言學習</a>
+              </ul>
+            </div>
+
+            <!-- <div class="sidebar-box ftco-animate">
+            	<h3>Archives</h3>
+              <ul class="categories">
+              	<li><a href="#">December 2018 <span>(30)</span></a></li>
+              	<li><a href="#">Novemmber 2018 <span>(20)</span></a></li>
+                <li><a href="#">September 2018 <span>(6)</span></a></li>
+                <li><a href="#">August 2018 <span>(8)</span></a></li>
+              </ul>
+            </div> -->
+
+
+            <div class="sidebar-box ftco-animate">
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6684087118034118"
+                  crossorigin="anonymous"></script>
+              <!-- Waku Blog Sidebar -->
+              <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-6684087118034118"
+                  data-ad-slot="1983883785"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+              <!-- <h3>Paragraph</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p> -->
+            </div>
+          </div>
+        </div>
+			</div>
+		</section>
+    
+	<!-- footer & js -->
+	<%- include('shared/footer') %>
+    
+  <div id="spotsData" data-spots="<%= JSON.stringify(article) %>"></div>
+	<script>
+		var spots = document.getElementById('spotsData').getAttribute('data-spots');
+		var AllSpots = JSON.parse(spots);
+		var content = AllSpots.content;
+		var cleanedContent = content.replace(/<\/?[^>]+(>|$)/g, '');
+
+		var descriptionMeta = document.querySelector('meta[name="description"]');
+		if (descriptionMeta) {
+		descriptionMeta.setAttribute('content', cleanedContent);
+		}
+
+		var ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+		if (ogDescriptionMeta) {
+		ogDescriptionMeta.setAttribute('content', cleanedContent);
+		}
+
+	</script>
+
+  </body>
+</html>

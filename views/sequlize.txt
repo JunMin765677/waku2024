@@ -1,0 +1,50 @@
+--exsample==
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+---create model---
+npx sequelize-cli model:generate --name comment --content:TEXT
+npx sequelize-cli model:generate --name Qs --attributes city:string,gender:string,nickname:string,file:BLOB,content:TEXT
+npx sequelize-cli model:generate --name article --attributes title:TEXT,content:TEXT,categories:string
+npx sequelize-cli model:generate --name article --attributes title:TEXT,content:TEXT,categories:string,cover:TEXT,description:TEXT --force
+npx sequelize-cli model:generate --name check --attributes department:string,name:string,status:string,date:DATEONLY,time:TIME
+npx sequelize-cli model:generate --name check --attributes department:string,name:string,status:string,date:DATEONLY,time:TIME,memo:TEXT,statusOut:string,timeOut:TIME --force
+npx sequelize-cli model:generate --name picnic --attributes city:string,location:string,op1:BOOLEAN,op2:BOOLEAN,op3:BOOLEAN,op4:BOOLEAN,op5:BOOLEAN,op6:BOOLEAN,op7:BOOLEAN,op8:BOOLEAN,op9:BOOLEAN,op10:BOOLEAN,opentime:TEXT,shop:TEXT,googleMap:TEXT,picture:TEXT,description:TEXT,sharer:TEXT
+npx sequelize-cli model:generate --name Map --attributes city:string,location:string,op1:boolean,op2:boolean,op3:boolean,op4:boolean,op5:boolean,op6:boolean,op7:boolean,op8:boolean,op9:boolean,op10:boolean,opentime:text,shop:text,googleMap:text,picture:text,description:text,sharer:text
+npx sequelize-cli model:generate --name feedback --attributes nickname:string,email:TEXT,content:TEXT
+npx sequelize-cli model:generate --name review --attributes username:string,spotID:string,score:string,content:TEXT
+npx sequelize-cli model:generate --name spotPicture --attributes username:string,spotID:string,picture:TEXT,content:TEXT
+npx sequelize-cli model:generate --name event --attributes title:string,location:string,time:TEXT,detail:TEXT,picture:TEXT,tag:string
+npx sequelize-cli model:generate --name eventPicture --attributes tag:string,eventId:string,picture:TEXT,content:TEXT
+node_modules/.bin/sequelize model:generate --name Event --attributes title:string,location:string,time:TEXT,detail:TEXT,picture:TEXT,tag:string
+node_modules/.bin/sequelize model:generate --name EventPicture --attributes tag:string,picture:TEXT,content:TEXT
+node_modules/.bin/sequelize model:generate --name Skater --attributes name:string,city:TEXT,ig:TEXT,igURL:TEXT,fb:TEXT,fbURL:TEXT,years:TEXT,rules:TEXT,deck:TEXT,trucks:TEXT,wheels:TEXT,bushings:TEXT,bearings:TEXT,brands:TEXT,tops:TEXT,bottoms:TEXT,sneakers:TEXT,cap:TEXT,socks:TEXT,accessories:TEXT,googleID:TEXT,googleName:TEXT,email:TEXT,photo:TEXT,public:TEXT,pre:TEXT,pre:TEXT,pre:TEXT
+node_modules/.bin/sequelize model:generate --name StylePicture --attributes tag:string,picture:TEXT,content:TEXT,pre:TEXT
+node_modules/.bin/sequelize model:generate --name View --attributes eventId:string,styleId:string,spotId:string,pageId:string,count:INTEGER,pre1:string,pre2:string
+node_modules/.bin/sequelize model:generate --name Interview --attributes title:TEXT,little:TEXT,date:TEXT,content:TEXT,tag1:TEXT,tag2:TEXT,pre1:string,pre2:string
+node_modules/.bin/sequelize model:generate --name Piece --attributes title:TEXT,little:TEXT,date:TEXT,content:TEXT,tag:TEXT,tag2:TEXT,pre1:TEXT,pre2:TEXT
+node_modules/.bin/sequelize model:generate --name Rider --attributes headshot:STRING,athlete:STRING,nation:STRING,age:INTEGER,Insta:STRING,InstaLink:STRING,stance:STRING,hometown:STRING,GlobalRank:INTEGER,OlympicRank:INTEGER,TWRank:INTEGER,twoYearsStreet:INTEGER,twoYearsPark:INTEGER,twoYearsVert:INTEGER,alltimeOverall:INTEGER,alltimeStreet:INTEGER,alltimePark:INTEGER,alltimeVert:INTEGER,sponsors:TEXT,gender:STRING,coach:TEXT,history:TEXT,pre1:STRING,pre2:STRING,pre3:STRING,pre4:STRING
+ 
+--shop--
+node_modules/.bin/sequelize model:generate --name User --attributes email:string,password:string,role:string
+node_modules/.bin/sequelize model:generate --name Product --attributes name:string,description:text,price:integer,image:string,deletedAt:integer,inventory:integer
+node_modules/.bin/sequelize model:generate --name Order --attributes UserId:integer,name:string,phone:string,address:string,sn:string,amount:integer,shipping_status:string,payment_status:string
+node_modules/.bin/sequelize model:generate --name Payment --attributes OrderId:integer,payment_method:string,isSuccess:boolean,failure_message:text,payTime:date
+node_modules/.bin/sequelize model:generate --name OrderItem --attributes OrderId:integer,ProductId:integer,price:integer,quantity:integer
+node_modules/.bin/sequelize model:generate --name Cart --attributes UserId:integer
+node_modules/.bin/sequelize model:generate --name CartItem --attributes quantity:integer,ProductId:integer,CartId:integer
+node_modules/.bin/sequelize model:generate --name Portfolio --attributes tag:string,image:string
+
+
+node_modules/.bin/sequelize migration:generate --name add-deletedAt-to-products --attributes deletedAt:integer
+node_modules/.bin/sequelize migration:generate --name add-inventory-to-products --attributes inventory:integer:notNull
+
+
+
+--running--
+npx sequelize-cli db:migrate
+--UNDOING--
+npx sequelize-cli db:migrate:undo
+
+--Add New Col--
+npx sequelize-cli migration:generate --name add_new_column_to_maps_table
+
+

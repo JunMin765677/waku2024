@@ -1,0 +1,236 @@
+<style>
+    .alert-info {
+        color: #c38a2c;
+        background-color: #f7e8c4;
+        border-color: #f5ead2;
+        font-weight: 600;
+    }
+</style> 
+    <% if (success_msg.length === 0) { %>
+    <% } else { %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= success_msg %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+
+    <% if (warning_msg.length === 0) { %>
+    <% }else{ %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= warning_msg %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+    
+    <% if (danger_msg.length === 0) { %>
+    <% }else{ %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= danger_msg %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+
+    <% if (successAdd_msg.length === 0) { %>
+    <% } else { %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= successAdd_msg  %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+
+    <% if (successDel_msg.length === 0) { %>
+    <% } else { %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= successDel_msg  %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+
+    <% if (addCartItem_msg.length === 0) { %>
+    <% } else { %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= addCartItem_msg  %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+    
+    <% if (subCartItem_msg.length === 0) { %>
+    <% } else { %>
+        <script>
+            $(function() {
+                setTimeout(function() {
+                    $.notify({
+                        // options
+                        icon: '',
+                        title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+                        message: "<figure><img src=\"map/img/notify_img.png\"></figure><p><%= subCartItem_msg  %></p> "
+                    }, {
+                        // settings
+                        icon_type: 'image',
+                        type: 'info',
+                        delay: 500,
+                        timer: 3000,
+                        z_index: 9999,
+                        showProgressbar: false,
+                        placement: {
+                            from: "top",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated bounceInUp',
+                            exit: 'animated bounceOutDown'
+                        },
+                    });
+                }, 1000); // change the start delay
+            });        
+        </script>
+    <% } %>
+    
+    
+    
+  
+

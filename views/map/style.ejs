@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-TW">                                 
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title><%= skater.name %> | Snaps | 滑板地圖SpotsMap</title>
+
+	<meta name="description" content="<%= skater.name %>,<%= skater.city %>,<%= skater.ig %>,<%= skater.years %>,<%= skater.rules %>,<%= skater.deck %>,<%= skater.trucks %>,<%= skater.wheels %>,<%= skater.bushings %>,<%= skater.bearings %>,<%= skater.brands %>,<%= skater.tops %>,<%= skater.bottoms %>,<%= skater.sneakers %>,<%= skater.cap %>,<%= skater.socks %>,<%= skater.accessories %>">
+	<meta name="keywords" content="Skater Snap, OOTD, 滑板Setup">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/style/<%= skater.id %>">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/style/<%= skater.id %>" />
+	<meta property="og:type"               content="profile" />
+	<meta property="og:title"              content="<%= skater.name %> | Snaps | 滑板地圖SpotsMap" />
+	<meta property="og:description" content="<%= skater.name %>,<%= skater.city %>,<%= skater.ig %>,<%= skater.years %>,<%= skater.rules %>,<%= skater.deck %>,<%= skater.trucks %>,<%= skater.wheels %>,<%= skater.bushings %>,<%= skater.bearings %>,<%= skater.brands %>,<%= skater.tops %>,<%= skater.bottoms %>,<%= skater.sneakers %>,<%= skater.cap %>,<%= skater.socks %>,<%= skater.accessories %>" />
+
+	<% if (cover.picture) { %>
+		<meta property="og:image"              content="<%= cover.picture %>" />
+	<% } else { %>
+		<meta property="og:image"              content="map/img/test.jpg" />
+	<% } %>
+
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="800" />
+
+
+	<!-- SPECIFIC CSS -->
+	<link href="map/css/shop.css" rel="stylesheet">
+
+	<!-- SPECIFIC CSS - GRID GALLERY -->
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+	<!-- <link href="map/css/finaltilesgallery.css" rel="stylesheet"> -->
+	<!-- <link href="map/css/lightbox2.css" rel="stylesheet"> -->
+
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<hr>
+		<hr>
+		<div id="position" style=" background-color: #dadce1;">
+			<div class="container" >
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/styles">找風格</a>
+					</li>
+					<li><a href="/skateboard.map.spot/style/<%= skater.id %>"><%= skater.name %></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End position -->
+
+		<div class="container margin_60">
+			<!-- <div class="banner_style">
+				<div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)" style="background-color: rgba(0, 0, 0, 0.3);">
+					<div>
+						<h3>Your Style<br>Your Statement<br></h3>
+						<p></p>
+						<a href="/skateboard.map.spot/styles" class="btn_1">回前頁Back</a>
+					</div>
+				</div>
+			</div> -->
+			<!-- /banner_2 -->
+
+			<div class="row">
+				<div class="col-lg-8">
+
+					<div class="product-details">
+                        
+						<div class="basic-details">
+							<div class="row">
+								<div class="image-column col-6 col-md-6 col-sm-6">
+									<% if (cover.picture) { %>
+										<figure class="image-box"><img src="<%= cover.picture %>" alt=""></figure>
+									<% }else{ %>
+										<figure class="image-box"><img src="map/img/test.jpg" alt=""></figure>
+									<% } %>
+
+								</div>
+								<div class="info-column col-6 col-md-6 col-sm-6" style="align-items: center; display: flex;">
+								  <!-- form1 start -->
+									<div class="details-header">
+										Name: <b><%= skater.name %></b>
+										<br><br>
+										Current city: <b><%= skater.city %></b>
+										<br><br>
+										Instagram: <b><a href="<%= skater.igURL %>" target="_blank"><%= skater.ig %></a></b>
+										<br><br>
+										Skating for: <b><%= skater.years %></b>
+										<br><br>
+										My rules(信念): <b><%= skater.rules %></b>
+										<br>
+									</div>
+								  <!-- form1 end -->
+								</div>
+							</div>
+						</div>
+						<!--End Basic Details-->
+
+						<div class="product-info-tabs">
+							<div class="prod-tabs" id="product-tabs">
+								<!-- choose -->
+								<div class="tab-btns clearfix">
+									<a href="#prod-Photos" class="tab-btn active-btn">Snap</a>
+									<a href="#prod-Setup" class="tab-btn">Setup & OOTD</a>
+								</div>
+
+                                <!-- content -->
+								<div class="tabs-container">
+
+                                    <!-- Tab1 -->
+									<div class="tab active-tab" id="prod-Photos">
+										<div class="isotope-wrapper">
+											<div class="row magnific-gallery add_bottom_60 ">
+												<% if (skater.StylePictures.length === 0) { %>
+												<% }else{ %>
+													<% for (var i = 0; i < skater.StylePictures.length; i++) { %>
+														<div class=" col-6 col-sm-6 isotope-item">
+															<div class="img_wrapper_gallery">
+																<div class="img_container_gallery">
+																	<a href="<%= skater.StylePictures[i].picture %>" title="Photo title" data-effect="mfp-zoom-in"><img src="<%= skater.StylePictures[i].picture %>" alt="Image" class="img-fluid">
+																		<i class="icon-resize-full-2"></i>
+																	</a>
+																</div>
+															</div>
+														</div>
+													<% } %>
+												<% } %>
+											</div>
+										</div>	
+									</div>
+									<!--End Tab1-->
+
+                                    <!-- Tab2 -->
+									<div class="tab" id="prod-Setup">
+										<h3>《Setup》</h3>
+										<br>
+										<div class="reviews-container">
+											<p>Deck: <b><%= skater.deck %></b></p>
+											<p>Trucks: <b><%= skater.trucks %></b></p>
+											<p>Wheels: <b><%= skater.wheels %></b></p>
+											<p>Bushings: <b><%= skater.bushings %></b></p>
+											<p>Bearings: <b><%= skater.bearings %></b></p>
+										</div>
+										<br>
+										<h3>《Fashion》</h3>
+										<br>
+										<div class="reviews-container">
+											<p>Favorite brands: <b><%= skater.brands %></b></p>
+											<p>Tops: <b><%= skater.tops %></b></p>
+											<p>Bottoms: <b><%= skater.bottoms %></b></p>
+											<p>Sneakers: <b><%= skater.sneakers %></b></p>
+											<p>Cap: <b><%= skater.cap %></b></p>
+											<p>Socks: <b><%= skater.socks %></b></p>
+											<p>Accessories(配件): <b><%= skater.accessories %></b></p>
+										</div>
+										<br>
+									</div>
+									<!--End Tab2-->
+
+									
+
+								</div>
+								<!--End tabs-container-->
+							</div>
+						</div>
+						<!--End product-info-tabs-->
+
+					</div>
+					<!--End Product-details-->
+				</div>
+				<!--End Col-->
+
+				<aside class="col-lg-4" id="sidebar">
+					<div class="theiaStickySidebar">
+						<div class="box_style_1" style="background-color: #eaedec;">
+							<h3 class="inner">======</h3>
+							<div class="row">
+								<img alt="Image" class="image-box" src="map/img/TEST-aside2.png" >
+								<!-- <div class="col-9 " >
+									<h5></h5>
+									<p></p>
+								</div>
+							    <div class="col-3"> -->
+									<!-- <img alt="Image" class="sp-image" src="" > -->
+								<!-- </div> -->
+							</div>
+							<!-- <a class="btn_full_outline" href="/skateboard.map.spot/logout" target="_blank">登出Logout</a> -->
+						</div>
+						<!--/box_style_1 -->
+					</div>
+					<!--/sticky -->
+
+				</aside>
+
+			</div>
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footerSingle') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<script>
+		if ($('.prod-tabs .tab-btn').length) {
+			$('.prod-tabs .tab-btn').on('click', function (e) {
+				e.preventDefault();
+				var target = $($(this).attr('href'));
+				$('.prod-tabs .tab-btn').removeClass('active-btn');
+				$(this).addClass('active-btn');
+				$('.prod-tabs .tab').fadeOut(0);
+				$('.prod-tabs .tab').removeClass('active-tab');
+				$(target).fadeIn(500);
+				$(target).addClass('active-tab');
+			});
+
+		}
+	</script>
+
+
+	<!-- Specific scripts - Grid gallery -->
+	<!-- <script src="map/js/jquery.finaltilesgallery.js"></script>
+	<script src="map/js/lightbox2.js"></script>
+	<script>
+		$(function () {
+			'use strict';
+			$(".final-tiles-gallery").finalTilesGallery({
+				minTileWidth: 1
+			});
+		});
+	</script> -->
+
+	<!-- Fixed sidebar -->
+	<script src="map/js/theia-sticky-sidebar.js"></script>
+	<script>
+		jQuery('#sidebar').theiaStickySidebar({
+			additionalMarginTop: 80
+		});
+	</script>
+
+	<!-- Masonry filter -->
+	<script src="map/js/isotope.min.js"></script>
+	<script>
+	$(window).on('load',function(){
+		var $container = $('.isotope-wrapper'),
+			filters = {};
+
+		$container.isotope({
+		itemSelector : '.isotope-item'
+		});
+
+		$('.styled-select-filters select').change(function(){
+			var $this = $(this);
+			var group = $this.attr('data-filter-group');      
+			filters[ group ] = $this.find(':selected').attr('data-filter-value');
+			var isoFilters = [];
+			for ( var prop in filters ) {
+				isoFilters.push( filters[ prop ] )
+			}
+			var selector = isoFilters.join('');
+			$container.isotope({ filter: selector });
+			return false;
+			});
+	});
+	</script>	
+	
+    
+	
+
+</body>
+
+</html>

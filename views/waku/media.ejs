@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <%- include('shared/head') %>
+  </head>
+  <body>
+    
+    <%- include('shared/nav') %>
+    		  
+	<section class="ftco-services">
+		<div class="container">
+			<div class="row justify-content-start mt-5 py-5">
+				<div class="col-md-4 heading-section ftco-animate">
+					<h2 class="mb-4">SpotsMap on Instagram</h2>
+					<p>
+						在這個數位時代，我相信<b>社群媒體也可以為品牌和網站帶來更多的參與度</b>。自從我開始架設滑板地圖SpotsMap以來，我就一直在尋找有效的方式來吸引更多的目光。我的目標是創建一個集合滑板場地、滑板賽事與活動、國內滑板選手的積分排名以及獨家專訪的滑板情報網站。<b>而Instagram成為了我達成這個目標的關鍵平台</b>。
+					</p>
+				</div>
+				<div class="col-md-8 ftco-animate">
+					<div class="row d-flex">
+						<div class="col-md-6 d-flex align-items-stretch">
+							<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+								<div class="icon d-flex justify-content-center align-items-center">
+									<span class="flaticon-layers"></span>
+								</div>
+								<div class="media-body p-2 mt-3">
+								<h3 class="heading">從0到13000</h3>
+								<p>我開始經營Instagram的初衷很簡單：宣傳我的網站。但這個旅程遠遠超出了我的預期。僅通過十幾篇精心策劃的<b>Post、Shorts與Reels</b>，我就成功吸引了超過700位滑板愛好者成為SpotsMap的Fans。截至2024年2月底，我的Instagram帳號<b>為網站累積曝光次數達到了大約一萬三千次</b>。</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 d-flex align-items-stretch">
+							<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+								<div class="icon d-flex justify-content-center align-items-center">
+									<span class="flaticon-layers"></span>
+								</div>
+								<div class="media-body p-2 mt-3">
+								<h3 class="heading">The Power of Content Creation</h3>
+								<p>我所發布的內容包括Post、Shorts與Reels。每一次貼文都旨在展示內容創造的力量，並嘗試與滑板社群建立起更深的連結。<b>通過Instagram的洞察報告和Google Analytics的數據分析</b>，我可以看到我的社群媒體策略提高了新用戶對網站的初次訪問與後續的互動次數，更重要的是，成功地將<b>社群的流量導流至滑板地圖</b>。</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 d-flex align-items-stretch">
+							<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+								<div class="icon d-flex justify-content-center align-items-center">
+									<span class="flaticon-layers"></span>
+								</div>
+								<div class="media-body p-2 mt-3">
+								<h3 class="heading">Looking Forward</h3>
+								<p>展望未來，我計劃進一步<b>探索更多的社群平台</b>，以達到更廣泛的受眾群體。同時，我也希望能透過<b>更多滑板品牌和專業滑板選手的合作</b>，帶來更多獨家內容和活動，進一步豐富滑板地圖上的內容。我將持續利用數據分析來優化我的內容策略，確保能夠提供最有價值和最受歡迎的資訊給SpotsMap的用戶。我相信，通過持續的努力和創新，滑板地圖成為滑板社群不可或缺的資源。</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-2">
+		<div class="col-md-4 heading-section ftco-animate">
+			<span class="subheading subheading-with-line"><small class="pr-2 bg-light">Social Media</small></span>
+			<h2 class="mb-4">SpotsMap on Instagram</h2>
+		</div>
+		<div class="col-md-8 pl-md-5 heading-section ftco-animate">
+			<div class="pl-md-4 border-line">
+				<p>在這個數位時代，我相信<b>社群媒體也可以為品牌和網站帶來更多的參與度</b>。自從我開始架設滑板地圖SpotsMap以來，我就一直在尋找有效的方式來吸引更多的目光。我的目標是創建一個集合滑板場地、滑板賽事與活動、國內滑板選手的積分排名以及獨家專訪的滑板情報網站。<b>而Instagram成為了我達成這個目標的關鍵平台</b>。</p>
+			</div>
+		</div>
+		</div>
+		</div>
+		<div class="container">
+		<div class="row" style="row-gap: 10px;">
+			<% instagram.reverse().forEach(function(project) { %>
+			<div class="col-6 col-md-6 col-lg-3 ftco-animate">
+				<div class="project" style="background-color: rgb(172, 174, 174);">
+					<img src="<%= project.image %>" class="img-fluid" alt="Colorlib Template">
+					<div class="text">
+						<span>Instagram Projects</span>
+						<h3><a href="project.html"></a></h3>
+					</div>
+					<a href="<%= project.image %>" class="icon image-popup d-flex justify-content-center align-items-center" loading="lazy">
+						<span class="icon-expand"></span>
+					</a>
+				</div>
+			</div>
+			<% }) %>
+		</div>
+	</section>
+
+    
+	<!-- footer & js -->
+	<%- include('shared/footer') %>
+    
+  </body>
+</html>

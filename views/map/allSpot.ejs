@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title>滑板地圖-全台板點特蒐x當期活動整理x滑板專訪</title>
+	<meta name="description">
+	<meta name="keywords" content="板點情報, 滑板新手, 滑板場, 最新滑板活動整理">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="滑板地圖-全台板點特蒐x當期活動整理x滑板專訪" />
+	<meta property="og:description" />
+	<meta property="og:image"              content="map/img/banner-Media-2.png" />
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+	<style>
+		#map_canvas {
+			height: 300px;
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 10px;
+		}
+		#current {
+			padding-top: 25px;
+		}
+	</style>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
+    <!-- End Preload -->
+
+    <div class="layer"></div>
+    <!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<%- include('share/header') %>
+	<!-- End Header -->
+    
+	<main>
+		<hr>
+		<div class="container margin_60">
+			<div class="banner_citySpot" id="banner_citySpot">
+				<div class="wrapper d-flex justify-content-end align-items-end opacity-mask" >
+					<div>
+						<!-- <h3>Share <br>Your Spot</h3>
+						<p></p> -->
+						<!-- <a href="/skateboard.map.spot" class="btn_1 " style="background: #dd8c4a;" data-bs-toggle="modal" data-bs-target="#myReview">板點通報</a> -->
+					</div>
+				</div>
+			</div>
+			<div class="main_title">
+				<h2>找找<span style="color: #dd8c4a;">板點Spots</span></h2>
+				<p>右上角開啟全螢幕<i class="icon-resize-full-2"></i>左上角開啟街景模式<i class="icon-pitch"></i></p>
+			</div>
+			<div id="map" class="contact_2"></div>
+			<!-- End map -->
+				
+			<div class="row">
+				<!-- 四格功能選單 -->
+				<div class="white_bg">
+					<div class="container margin_60">
+						<div class="row small-gutters categories_grid">
+							<div class="col-12 col-sm-12 col-md-6">
+								<a href="/skateboard.map.spot/events">
+									<img src="map/img/white-4.webp" alt="當期滑板活動" class="img-fluid">
+									<div class="">
+										<h2></h2>
+										<p></p>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-sm-12 col-md-6">
+								<div class="row small-gutters mt-md-0 mt-sm-2">
+									<div class="col-6 col-sm-6">
+										<a href="/skateboard.map.spot/spotsmap">
+											<img src="map/img/white-5.webp" alt="滑板點情報" class="img-fluid">
+											<div class="">
+												<h2></h2>
+												<p></p>
+											</div>
+										</a>
+									</div>
+									<div class="col-6 col-sm-6">
+										<a href="/skateboard.map.spot/riders">
+											<img src="map/img/white-3.webp" alt="找教練" class="img-fluid">
+											<div class="">
+												<h2></h2>
+												<p></p>
+											</div>
+										</a>
+									</div>
+									<div class="col-12 col-sm-12 mt-sm-2">
+										<a href="/skateboard.map.spot/interviews" class="" >
+											<img src="map/img/white-2.webp" alt="風格滑板人" class="img-fluid">
+											<div class="">
+												<h2></h2>
+												<p></p>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--/categories_grid-->
+					</div>
+					<!-- /container -->
+				</div>
+				<!-- 四格結束 -->
+			</div>
+
+			<div class="row">
+				<div class="col-lg-9" id="faq">
+					<h3>滑板地圖 SpotsMap - 新手導覽</h3>
+					<div id="tips" class="accordion_styled">
+					  <div class="card">
+						<div class="card-header">
+						  <h1>
+							<a class="accordion-toggle" style="font-size:18px;" data-bs-toggle="collapse" data-bs-parent="#tips" href="#collapseOne_tips">新手滑板場地在哪裡?<i class="indicator icon-plus float-end"></i></a>
+						  </h1>
+						</div>
+						<div id="collapseOne_tips" class="collapse" data-bs-parent="#tips">
+						  <div class="card-body">
+							<p>對一個全然的新手來說，其實不容易交到板友、融入滑板圈，因為滑板很多地方都能玩，以我跟我女朋友為例，我們一開始滑板玩了近半年，自己探索可以玩滑板的地方，但幾乎完全遇不到其他有在玩板的人！（甚至也沒有加入任何的LINE群）後來才發現除了地點，選對時間去也很重要！</p>
+							<p>長板、技術板、交通板或衝浪滑板偏好的場地類型也略有不同！加入當地的滑板團體(很多會定期約板、團練、街滑)是一直玩下去的一大誘因。</p>
+						  </div>
+						</div>
+					  </div>
+					  <div class="card">
+						<div class="card-header">
+						  <h1>
+							<a class="accordion-toggle" style="font-size:18px;" data-bs-toggle="collapse" data-bs-parent="#tips" href="#collapseTwo_tips">在Dcard、FB、IG上的滑板資訊<i class="indicator icon-plus float-end"></i></a>
+						  </h1>
+						</div>
+						<div id="collapseTwo_tips" class="collapse" data-bs-parent="#tips">
+						  <div class="card-body">
+							<p>滑板訊息很大部份來自於當地的滑板店、滑板團體和選手，辦了很多的活動(見本站最新活動區)，拍了很多很優質的影片，而目前超過9成都在IG上經營，FaceBook和Dcard相對來說是少很多。</p>
+						  </div>
+						</div>
+					  </div>
+					  <div class="card">
+						<div class="card-header">
+						  <h1>
+							<a class="accordion-toggle" style="font-size:18px;" data-bs-toggle="collapse" data-bs-parent="#tips" href="#collapseThree_tips">滑板地圖目前蒐集了哪些各縣市的板點/滑板場/滑板公園?<i class="indicator icon-plus float-end"></i></a>
+						  </h1>
+						</div>
+						<div id="collapseThree_tips" class="collapse" data-bs-parent="#tips">
+						  <div class="card-body">
+							<p id="cardforspots"></p>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					<!--End tips -->
+				</div>
+		    </div>
+
+		</div>
+    </main>
+	<!-- End main -->
+	
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div>
+	<!-- Back to top button -->
+		
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- Map -->
+	<div id="spotsData" data-spots="<%= JSON.stringify(Spots) %>"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyA3mojVekW0Gc6loBjM0FQfsz8vt-dd3jw"></script>
+	<script type="text/javascript" src="map/js/map_home.js"></script>
+	<script type="text/javascript" src="map/js/infobox.js"></script>
+	<!-- END Map -->
+
+	<!-- SEO description -->
+	<script>
+		var spots = document.getElementById('spotsData').getAttribute('data-spots');
+		var AllSpots = JSON.parse(spots);
+
+		var locations = AllSpots.map(function(spot) {
+		return spot.city + ' - ' + spot.location + ' - ' + spot.opentime + ' - ' + spot.description + ' - ' + spot.sharer+ ' - ' + spot.shop;
+		}).join(', ');
+
+		var des = AllSpots.map(function(spot) {
+			return spot.city + ' - ' + spot.location;
+			}).join(', ');	
+
+		var descriptionMeta = document.querySelector('meta[name="description"]');
+		if (descriptionMeta) {
+		descriptionMeta.setAttribute('content', des);
+		}
+
+		var ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+		if (ogDescriptionMeta) {
+		ogDescriptionMeta.setAttribute('content', des);
+		}
+
+		var containerElement = document.getElementById('cardforspots');
+		var paragraphElement = document.createElement('p');
+		var locationsText = document.createTextNode(locations);
+		paragraphElement.appendChild(locationsText);
+		containerElement.appendChild(paragraphElement);
+
+	</script>
+	<!-- END SEO description -->
+
+	<!-- addSpot Popup -->
+	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">板點回報 Share Spot</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form method="post" id="newspotPopup" action="/skateboard.map.spot/handleAddLocation">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<select class="form-select" name="city" id="room_type_review" required>
+										<option value="">選擇縣市 (必填)*</option>
+										<option value="臺北">臺北</option>
+										<option value="新北">新北</option>
+										<option value="桃園">桃園</option>
+										<option value="臺中">臺中</option>
+										<option value="臺南">臺南</option>
+										<option value="高雄">高雄</option>
+										<option value="基隆">基隆</option>
+										<option value="新竹">新竹</option>
+										<option value="嘉義">嘉義</option>
+										<option value="苗栗">苗栗</option>
+										<option value="彰化">彰化</option>
+										<option value="南投">南投</option>
+										<option value="雲林">雲林</option>
+										<option value="屏東">屏東</option>
+										<option value="宜蘭">宜蘭</option>
+										<option value="花蓮">花蓮</option>
+										<option value="臺東">臺東</option>
+										<option value="澎湖">澎湖</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input name="location" type="text" placeholder="板點名稱 (必填)*" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>簡單敘述這個地點</label>
+								<textarea name="description" id="review_text" class="form-control" style="height:100px" wrap="hard" cols="50" rows="5" placeholder="讓其他人更瞭解這裡的現況！ ex.廁所在哪裡、有地形嗎、安全嗎、有無遮蔭、建議等等"></textarea>
+							</div>
+							<div class="col-12">
+								<label><b>地點定位，將標記移到定位點(衛星檢視可協助更精準定位)。</b></label>
+								<div id="map_canvas" class="map"></div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12" id="faq">
+								<div id="payment" class="accordion_styled">
+									<!-- 新增更多詳細資料 -->
+									<div class="card">
+										<div class="card-header">
+											<h4>
+												<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#payment" href="#collapseOne_payment">新增更多詳細資料 (非必填)<i class="indicator icon-minus float-end"></i></a>
+											</h4>
+										</div>
+										<div id="collapseOne_payment" class="collapse" data-bs-parent="#payment">
+											<div class="card-body">
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="floor" id="review" type="text" placeholder="這裡的地板材質" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="opentime" id="lastname_review" type="text" placeholder="開放時間，ex.晚上有開燈嗎?" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="shop" id="lastname_review" type="text" placeholder="附近好吃好玩 ex.附近推薦美食、推薦行程?" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="googleMap" type="text" placeholder="Google Map 定位連結，協助導航點" class="form-control">
+													</div>
+													<div id="current">
+													</div>				
+												</div>										
+												<div class="col-md-9">
+													<div class="form-group">
+														<label>ex.滑板地圖</label>
+														<input name="sharer" id="lastname_review" type="text" placeholder="首位板點回報人（歡迎所有滑板人板店教練選手）" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<label>IG連結：https://www.instagram.com/ID</label>
+														<input name="op1" id="lastname_review" type="text" placeholder="讓板友們認識你! Instagram/fb/twitter/web連結" class="form-control">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 新增更多詳細資料END -->
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="g-recaptcha" data-sitekey="<%= process.env.RECAPTCHA_SITE_KEY %>"></div>
+								<br/>
+								<input type="submit" class="btn_1 green" value="送出">
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End addSpot Popup -->
+
+	<!-- recaptcha v2 -->
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script>
+		// 在提交表單時，將回應憑證的值設置成單一字串
+		document.getElementById("newspotPopup").addEventListener("submit", function (event) {
+		event.preventDefault(); // 防止表單預設提交行為
+
+		// 獲取回應憑證的值
+		var recaptchaResponse = document.querySelector(".g-recaptcha-response");
+		var recaptchaValue = recaptchaResponse.value;
+
+		// 移除多餘的空格和換行，只保留有效的回應憑證
+		var cleanRecaptchaValue = recaptchaValue.replace(/\s/g, "");
+
+		// 將回應憑證的值設置成單一字串
+		recaptchaResponse.value = cleanRecaptchaValue;
+
+		// 繼續提交表單
+		this.submit();
+		});
+	</script>	  
+	<!-- recaptcha v2 -->
+	
+	<!-- banner popup js -->
+	<script>
+		// 監聽點擊事件
+		document.getElementById("banner_citySpot").addEventListener("click", function() {
+			// 觸發彈出窗口
+			var myReviewModal = new bootstrap.Modal(document.getElementById('myReview'));
+			myReviewModal.show();
+		});
+	</script>
+	<!-- banner popup js -->	
+
+	<!-- GET lat/lng -->
+	<script>
+		var map = new google.maps.Map(document.getElementById('map_canvas'), {
+			zoom: 10,
+			center: new google.maps.LatLng(24.105771, 120.807460),
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: true
+		});
+		
+		var myMarker = new google.maps.Marker({
+			position: new google.maps.LatLng(24.105771, 120.807460),
+			draggable: true
+		});
+
+		google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+			document.getElementById('current').innerHTML = 
+			'<input name="lat" placeholder="經度" type="hidden" class="form-control" value=" ' + evt.latLng.lat().toFixed(6) + '"> <input name="lon" placeholder="緯度" type="hidden" class="form-control" value=" ' + evt.latLng.lng().toFixed(6) + '">';
+		});
+		
+		google.maps.event.addListener(myMarker, 'dragstart', function (evt) {
+			document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+		});
+		
+		map.setCenter(myMarker.position);
+		myMarker.setMap(map);
+
+	</script>
+	<!-- GET lat/lng END -->	
+
+	<!-- 定位 -->
+	<script>
+		let infoWindow;
+
+		function addLocationButton(map) {
+		const locationButton = document.createElement("button");
+
+		locationButton.textContent = "移動到你現在的位置！";
+		locationButton.classList.add("custom-map-control-button");
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationButton);
+		locationButton.addEventListener("click", () => {
+			if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+				const pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				};
+
+				if (!infoWindow) {
+					infoWindow = new google.maps.InfoWindow();
+				}
+
+				infoWindow.setPosition(pos);
+				infoWindow.setContent("Boom！在這裡！");
+				infoWindow.open(map);
+				map.setCenter(pos);
+				},
+				() => {
+				handleLocationError(true, infoWindow, map.getCenter());
+				}
+			);
+			} else {
+			// Browser doesn't support Geolocation
+			handleLocationError(false, infoWindow, map.getCenter());
+			}
+		});
+		}
+
+		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		infoWindow.setPosition(pos);
+		infoWindow.setContent(
+			browserHasGeolocation
+			? "Error: The Geolocation service failed."
+			: "Error: Your browser doesn't support geolocation."
+		);
+		infoWindow.open(map);
+		}
+
+		addLocationButton(map);
+
+	</script>
+	<!-- 定位 end -->
+  </body>
+</html> 
+

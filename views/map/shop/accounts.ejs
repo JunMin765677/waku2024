@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+	<base href="/">
+	<%- include('../share/head') %>
+	<!-- CUSTOM CSS -->
+	<link href="map/css/admin.css" rel="stylesheet">
+	<link href="map/css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<%- include('../partials/preloader') %>
+	<!-- Header================================================== -->
+	<%- include('../share/header-shop') %>	
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="margin_60 container">
+			<div id="tabs" class="tabs">
+				<nav>
+					<ul>
+						<li><a href="#section-1" class="icon-booking"><span>訂單列表</span></a>
+						</li>
+						<li><a href="#section-2" class="icon-wishlist"><span>願望清單</span></a>
+						</li>
+						<li><a href="#section-3" class="icon-settings"><span>設定</span></a>
+						</li>
+						<li><a href="#section-4" class="icon-profile"><span>會員資料</span></a>
+						</li>
+					</ul>
+				</nav>
+				<div class="content">
+
+					<section id="section-1">
+						<% orders.reverse().forEach(function(order) { %>
+							<div class="strip_booking">
+								<div class="row">
+									<!-- <div class="col-lg-2 col-md-2">
+										<div class="date">
+											<span class="month">Dec</span>
+											<span class="day"><strong>23</strong>Sat</span>
+										</div>
+									</div> -->
+									<div class="col-lg-8 col-md-5">
+										<h3 class="hotel_booking"><%= order.orderProducts[0].name %><span>等等共<%= order.orderProducts.length %>件幸運商品</span></h3>
+									</div>
+									<div class="col-lg-2 col-md-3">
+										<ul class="info_booking">
+											<li><strong>訂單編號</strong> <%= order.id %></li>
+											<li><strong>Booked on</strong> <%= order.updatedAt.toLocaleDateString('zh-TW') %>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-2 col-md-2">
+										<div class="booking_buttons">
+											<a href="/skateboard.map.spot/order/<%= order.id %>" class="btn_2" style="padding: 12px 8px;">訂單詳情</a>
+											<% if(order.shipping_status === '-1') { %>
+												<a href="javascript:void(0);" class="btn_3">訂單已取消</a>
+										    <% } else { %>
+												<form id="orderForm_<%= order.id %>" action="/skateboard.map.spot/order/<%= order.id %>/cancel" method="POST">
+													<a href="#0" class="btn_3" onclick="confirmCancel() ,orderForm('<%= order.id %>')">取消訂單</a>
+												</form>	 
+											<% } %>
+										</div>
+									</div>
+								</div>
+								<!-- End row -->
+							</div>
+							<!-- End strip booking -->
+                        <% }) %>
+					</section>
+					<!-- End section 1 -->
+
+					<section id="section-2">
+						<button type="submit" class="btn_1">籌備中，目前空空的</button>
+					</section>
+					<!-- End section 2 -->
+
+					<section id="section-3">
+						<button type="submit" class="btn_1">籌備中，目前空空的</button>
+					</section>
+					<!-- End section 3 -->
+
+					<section id="section-4">
+						<button type="submit" class="btn_1">籌備中，目前空空的</button>
+					</section>
+					<!-- End section 4 -->
+
+					</div>
+					<!-- End content -->
+				</div>
+				<!-- End tabs -->
+			</div>
+			<!-- end container -->
+	</main>
+	<!-- End main -->
+
+	<%- include('../share/footer') %>	
+	<!-- End footer -->
+	<%- include('../partials/scripts') %>
+
+	<%- include('../partials/message') %>
+
+	<!-- Specific scripts -->
+	<script src="map/js/tabs.js"></script>
+	<script>
+		new CBPFWTabs(document.getElementById('tabs'));
+	</script>
+	<script>
+		$('.wishlist_close_admin').on('click', function (c) {
+			$(this).parent().parent().parent().fadeOut('slow', function (c) {});
+		});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+	<base href="/">
+	<%- include('../share/head') %>
+	<!-- CUSTOM CSS -->
+    <link href="map/css/shop.css" rel="stylesheet">
+	<link href="map/css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<%- include('../partials/preloader') %>
+	<!-- Header================================================== -->
+	<%- include('../share/header-shop') %>	
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-lg-8 add_bottom_15">
+					<div class="form_title">
+						<h3><strong>1</strong>商品資訊</h3>
+						<p>
+							Product Information
+						</p>
+					</div>
+
+					<div class="step">
+						<div class="row">
+							<table class="table table-striped cart-list shopping-cart desktop-table">
+								<thead>
+									<tr>
+										<th>
+											商品資訊
+										</th>
+										<th>
+											單件金額
+										</th>
+										<th>
+											數量
+										</th>
+										<th>
+											小計
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% cart.cartProducts.forEach(function(item) { %>
+									<tr>
+										<td>
+											<div class="thumb_cart">
+												<a href="#"><img src="<%= item.image %>" alt="" loading="lazy">
+												</a>
+											</div>
+											<strong class="item_cart"><%= item.name %></strong>
+										</td>
+										<td>
+											<strong>NT$<%= item.price %></strong>
+										</td>
+										<td>
+											<strong><%= item.CartItem.quantity %>件</strong>
+										</td>
+										<td>
+											<strong>NT$<%= item.price * item.CartItem.quantity  %></strong>
+										</td>
+									</tr>
+									<% }) %>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>
+											<strong>小計:</strong><br>
+											<strong>運費:</strong><br>
+											<strong>合計:</strong>
+										</td>
+										<td>
+											<strong>NT$<%= amount %></strong><br>
+											<strong>免運費</strong><br>
+											<strong>NT$<%= amount %></strong>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- media -->
+							<table class="table table-striped cart-list shopping-cart mobile-table">
+								<thead>
+									<tr>
+										<th>
+										</th>
+										<th>
+										</th>
+										<th>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% cart.cartProducts.forEach(function(item) { %>
+									<tr>
+										<td>
+											<div class="thumb_cart">
+												<a href="#"><img src="<%= item.image %>" alt="" loading="lazy">
+												</a>
+											</div>
+										</td>
+										<td>
+											<strong><%= item.name %></strong>
+											$<%= item.price %><br>
+											x<%= item.CartItem.quantity %>件
+										</td>
+										<td>
+											<strong>NT$<%= item.price * item.CartItem.quantity  %></strong>
+										</td>
+									</tr>
+									<% }) %>
+									<tr>
+										<td></td>
+										<td>
+											<strong>小計:</strong><br>
+											<strong>運費:</strong><br>
+											<strong>合計:</strong>
+										</td>
+										<td>
+											<strong>NT$<%= amount %></strong><br>
+											<strong>免運費</strong><br>
+											<strong>NT$<%= amount %></strong>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- media -->
+						</div>
+					</div>
+	                
+					<form id="checkoutForm_<%= cartId.id %>" action="/skateboard.map.spot/order/data" method="POST">
+					<div class="form_title">
+						<h3><strong>2</strong>顧客資訊</h3>
+						<p>
+							Customer Information
+						</p>
+					</div>
+					<div class="step">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>收件人名稱</label>
+									<input type="text" class="form-control" id="firstname_booking" name="name" placeholder="請填入收件人真實姓名">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>收件人電話號碼</label>
+									<input type="text" id="telephone_booking" name="phone" class="form-control" placeholder="0987 654 321">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>電子信箱</label> 
+									<p><%= email %></p>
+									<!-- <input type="email" id="email_booking" name="email_booking" class="form-control" value="<%= email %>" > -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End step -->
+
+					<div class="form_title">
+						<h3><strong>3</strong>取貨方式</h3>
+						<p>
+							Delivery Method
+						</p>
+					</div>
+					<div class="step">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>付款方式</label>
+									 <div class="styled-select-common">
+                                        <select name="country" id="country">
+                                            <option value="" selected>請選擇</option>
+                                            <option value="Europe">7-11 取貨付款</option>
+                                        </select>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>取貨門市 <a href="https://emap.pcsc.com.tw/ecmap/default.aspx" style="color:rgb(229, 190, 93); font-size: medium;">(門市查詢)</a></label>
+									<input type="text" id="street_1" name="address" class="form-control" placeholder="松高門市" >
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End step -->
+
+					<div id="policy">
+						<!-- <h4>Cancellation policy</h4> -->
+						<div class="form-group">
+                            <label class="container_check" style=" font-size: medium;">
+                                我同意<a href="/skateboard.map.spot/policy" style="color:rgb(229, 190, 93);">網站服務條款</a>及<a href="/skateboard.map.spot/policy" style="color:rgb(229, 190, 93);">隱私權政策</a>。
+                                <input type="checkbox" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+						<input type="hidden" name="cartId" value="<%= cartId %>">
+						<input type="hidden" name="amount" value="<%= amount %>">
+						<input type="hidden" name="shipping_status" value="0">
+						<input type="hidden" name="payment_status" value="0">				  
+						<a href="javascript:void(0)" class="btn_1 medium" onclick="checkoutForm('<%= cartId.id %>')" style="background: rgb(223, 200, 124);">送出訂單</a>
+					</div>
+					</form>
+				</div>
+
+				<aside class="col-lg-4">
+					<!-- <div class="box_style_1">
+						<h3 class="inner">- Summary -</h3>
+						<table class="table table_summary">
+							<tbody>
+								<tr>
+									<td>
+										Check in
+									</td>
+									<td class="text-end">
+										10 April 2015
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Check out
+									</td>
+									<td class="text-end">
+										12 April 2015
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Rooms
+									</td>
+									<td class="text-end">
+										1 double room
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Nights
+									</td>
+									<td class="text-end">
+										2
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Adults
+									</td>
+									<td class="text-end">
+										2
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Children
+									</td>
+									<td class="text-end">
+										0
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Welcome bottle
+									</td>
+									<td class="text-end">
+										$34
+									</td>
+								</tr>
+								<tr class="total">
+									<td>
+										Total cost
+									</td>
+									<td class="text-end">
+										$154
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<a class="btn_full" href="confirmation_hotel.html">Book now</a>
+						<a class="btn_full_outline" href="single_hotel.html"><i class="icon-right"></i> Modify your search</a>
+					</div> -->
+					<!-- <div class="box_style_4">
+						<i class="icon_set_1_icon-57"></i>
+						<h4>Need <span>Help?</span></h4>
+						<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+						<small>Monday to Friday 9.00am - 7.30pm</small>
+					</div> -->
+				</aside>
+
+			</div>
+			<!--End row -->
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+
+	<%- include('../share/footer') %>	
+	<!-- End footer -->
+	<%- include('../partials/scripts') %>
+
+	<%- include('../partials/message') %>
+
+	<script>
+		if ($('.prod-tabs .tab-btn').length) {
+			$('.prod-tabs .tab-btn').on('click', function (e) {
+				e.preventDefault();
+				var target = $($(this).attr('href'));
+				$('.prod-tabs .tab-btn').removeClass('active-btn');
+				$(this).addClass('active-btn');
+				$('.prod-tabs .tab').fadeOut(0);
+				$('.prod-tabs .tab').removeClass('active-tab');
+				$(target).fadeIn(500);
+				$(target).addClass('active-tab');
+			});
+
+		}
+	</script>
+	
+
+</body>
+
+</html>

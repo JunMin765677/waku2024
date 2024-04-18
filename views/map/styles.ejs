@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-TW">                                 
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title>滑板風格 | Skater Snaps | 滑板地圖SpotsMap</title>
+
+	<meta name="description" content="Skater Snap, OOTD, 滑板Setup">
+	<meta name="keywords" content="Skater Snap, OOTD, 滑板Setup">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/styles">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/styles" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="滑板風格 | Skater Snaps | 滑板地圖SpotsMap" />
+	<meta property="og:description" content="Skater Snap, OOTD, 滑板Setup"/>
+	
+	
+	<meta property="og:image"              content="map/img/banner-Media-1.png" />
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+
+	<style>
+		.start {
+			background: #fff;
+			padding: 30px;
+			padding-top: 0;
+			text-align: left;
+			max-width: 400px;
+			margin: 40px auto;
+			position: relative;
+			box-sizing: border-box;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+		  }
+	</style>
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+ 		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/styles">找風格</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- End position -->
+
+		<div class="container margin_60">
+			<!-- <div class="banner_2">
+				<div class="wrapper d-flex justify-content-end align-items-end opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.08)" style="background-color: rgba(0, 0, 0, 0);">
+					<div>
+						<h3><br><br></h3>
+						<p></p>
+						<a href="#" class="btn_1" style="background: #b0a898;" data-bs-toggle="modal" data-bs-target="#Start">Start</a>
+					</div>
+				</div>
+			</div> -->
+			<!-- /banner_2 -->
+			<hr>
+			<div class="isotope-wrapper">
+				<div class="row">
+				<% styles.reverse().forEach(function(styles) { %>
+					<div class="col-6 col-md-3 col-sm-6 isotope-item">
+						<div class="img_wrapper_gallery" >
+							<div class="img_container_gallery">
+								<a href="/skateboard.map.spot/style/<%= styles.id %>" title="Photo title">
+									<img src="<%= styles.StylePictures[0].picture %>" alt="Image" class="img-fluid" loading="lazy">
+									<i class="icon-resize-full-2"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				<% }) %>
+				</div>
+				<!-- End row -->
+			</div>
+		</div>
+		<!-- End container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+		
+	<!-- Sign In Popup -->
+	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Sign In</h3>
+		</div>
+		<form>
+			<div class="sign-in-wrapper">
+				<a href="#0" class="social_bt facebook">Login with Facebook</a>
+				<a href="#0" class="social_bt google">Login with Google</a>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" id="password" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_15">
+					<div class="checkboxes float-start">
+						<label class="container_check">Remember me
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+                        </label>
+					</div>
+					<div class="float-end"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+				</div>
+				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+				<div class="text-center">
+					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
+				</div>
+				<div id="forgot_pw">
+					<div class="form-group">
+						<label>Please confirm login email below</label>
+						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+						<i class="icon_mail_alt"></i>
+					</div>
+					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</div>
+			</div>
+		</form>
+		<!--form -->
+	</div>
+	<!-- /Sign In Popup -->
+
+	<!-- Start -->
+	<div class="modal fade" id="Start" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content start">
+				<div class="small-dialog-header ">
+					<h3>請先登入 Login</h3>
+					<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+				</div>
+		
+				<div class="sign-in-wrapper ">
+					<a href="/auth/google" class="social_bt google">Login with Google</a>
+					<small><p>台灣滑板地圖採用 Google OAuth 2.0 第三方登入服務，這項服務遵循<a href="https://tools.ietf.org/html/rfc6749">Google OAuth2.0 通訊協定</a>、<a href="https://policies.google.com/privacy">Google 隱私權政策</a>及<a href="https://policies.google.com/terms">Google 服務條款</a>。</p></small>        
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+	
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- Masonry filter -->
+    <script src="map/js/isotope.min.js"></script>
+    <script>
+    $(window).on('load',function(){
+		var $container = $('.isotope-wrapper'),
+			filters = {};
+
+		$container.isotope({
+		itemSelector : '.isotope-item'
+		});
+
+		$('.styled-select-filters select').change(function(){
+			var $this = $(this);
+			var group = $this.attr('data-filter-group');      
+			filters[ group ] = $this.find(':selected').attr('data-filter-value');
+			var isoFilters = [];
+			for ( var prop in filters ) {
+				isoFilters.push( filters[ prop ] )
+			}
+			var selector = isoFilters.join('');
+			$container.isotope({ filter: selector });
+			return false;
+			});
+    });
+    </script>	
+
+	
+
+</body>
+
+</html>

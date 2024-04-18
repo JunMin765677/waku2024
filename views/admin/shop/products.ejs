@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="admin/assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <base href="/">
+    <%- include('../shared/head') %>
+  </head>
+ 
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+
+        <!-- Menu -->
+        <%- include('../shared/menu') %>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <%- include('../shared/nav') %>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">WakuStudio /</span> Products</h4>
+
+              <!-- Bordered Table -->
+              <div class="card">
+                <h5 class="card-header">Products</h5>
+                <%- include('../../map/partials/message') %>
+
+                <div class="card-body">
+                  <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Inventory</th>
+                          <th>Operate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <% products.forEach(function(product) { %>
+                          <tr>
+                            <td>
+                              <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong><%= product.id %></strong>
+                            </td>
+                            <td><%= product.name %></td>
+                            <td><%= product.price %>元</td>
+                            <!-- <td>
+                              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                <li
+                                  data-bs-toggle="tooltip"
+                                  data-popup="tooltip-custom"
+                                  data-bs-placement="top"
+                                  class="avatar avatar-xs pull-up"
+                                  title="Lilian Fuller"
+                                >
+                                  <img src="admin/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+                                </li>
+                                <li
+                                  data-bs-toggle="tooltip"
+                                  data-popup="tooltip-custom"
+                                  data-bs-placement="top"
+                                  class="avatar avatar-xs pull-up"
+                                  title="Sophia Wilkerson"
+                                >
+                                  <img src="admin/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+                                </li>
+                                <li
+                                  data-bs-toggle="tooltip"
+                                  data-popup="tooltip-custom"
+                                  data-bs-placement="top"
+                                  class="avatar avatar-xs pull-up"
+                                  title="Christina Parker"
+                                >
+                                  <img src="admin/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+                                </li>
+                              </ul>
+                            </td> -->
+                            <td><span class="badge bg-label-primary me-1"><%= product.inventory %>件</td></span></td>
+                            <td>
+                              <div class="dropdown">
+                                <button
+                                  type="button"
+                                  class="btn p-0 dropdown-toggle hide-arrow"
+                                  data-bs-toggle="dropdown"
+                                >
+                                  <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <!-- <a class="dropdown-item" href="/article"
+                                    target="_blank" ><i class="bx bx-edit-alt me-1"></i> Preview</a
+                                  > -->
+                                  <a class="dropdown-item" href="/admin/products/<%= product.id %>"
+                                    ><i class="bx bx-edit-alt me-1"></i> 編輯商品</a
+                                  >
+                                  <form id="deleteProductForm_<%= product.id %>" action="/admin/products/<%= product.id %>?_method=DELETE" method="POST"></form>
+                                    <a class="dropdown-item" href="#" onclick="submitForm('<%= product.id %>')"
+                                      ><i class="bx bx-trash me-1"></i> 刪除商品</a
+                                    >
+                                  </form>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                      <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--/ Bordered Table -->
+
+              <hr class="my-5" />
+
+            </div>
+            <!-- / Content -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <%- include('../shared/scripts') %>
+
+    <script>
+      function submitForm(productId) {
+        console.log('submitForm called for product ID:', productId);
+        const form = document.getElementById('deleteProductForm_' + productId);
+        
+        // 使用 Promise 確保異步處理完成後再執行 submit()
+        new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+          form.submit();
+        });
+      }
+    </script>
+  
+  </body>
+</html>

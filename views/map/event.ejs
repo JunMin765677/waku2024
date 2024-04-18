@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title><%= Event.title %>，一起出門滑起來！-滑板地圖SpotsMap</title>
+
+	<meta name="description">
+	<meta name="keywords" content="板聚哪裡有, 活動紀錄, 找板友, 最新滑板活動整理">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/event/<%= Event.id %>">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/event/<%= Event.id %>" />
+	<meta property="og:type"               content="article" />
+
+	<% if (Event.tag) { %>
+		<meta property="og:title"              content="已結束活動-<%= Event.title %>，一起出門滑起來！-滑板地圖SpotsMap" />
+	<% } else { %>
+		<meta property="og:title"              content="當期滑板活動-<%= Event.title %>，一起出門滑起來！-滑板地圖SpotsMap" />
+	<% } %>
+	
+		<meta property="og:description" />
+	
+	
+	<% if (Event.picture) { %>
+		<meta property="og:image"              content="<%= Event.picture %>" />
+	<% } else { %>
+		<meta property="og:image"              content="map/img/emptyEvent.png" />
+	<% } %>
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+
+	<!-- CSS -->
+	<link href="map/css/blog.css" rel="stylesheet">
+	<link href="map/css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- <div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div> -->
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/events">找活動</a></li>
+					<li><a href="/skateboard.map.spot/event/<%= Event.id %>"><%= Event.title %></a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<div class="row">
+
+				<div class="col-lg-9">
+					
+					<div class="box_style_1">
+						<div class="post nopadding">
+							<% if (Event.picture) { %>
+								<img src="<%= Event.picture %>" alt="Image" class="img-fluid" loading="lazy">
+							<% } else { %>
+								<img src="map/img/emptyEvent.png" alt="Image" class="img-fluid"loading="lazy">
+							<% } %>
+
+							<div class="post_info clearfix">
+								<div class="post-left">
+									<ul>
+										<li><i class="icon-calendar-empty"></i>On <span><%= Event.date %> </span><%= Event.startAt %><%= Event.endAt %>
+										</li>
+										<li><i class="icon-location"></i>活動在<span><%= Event.location %></span>舉辦
+										</li>
+									</ul>
+								</div>
+								<!-- <div class="post-right"><i class="icon-comment"></i><a href="#">25 </a>Comments</div> -->
+							</div>
+							<h1><%= Event.title %></h1>		
+							<p>
+								<%- Event.detail %>
+							</p>
+						</div>
+						<!-- <a href="#" class="btn_1 outline">活動報名</a>  -->
+
+
+  
+					</div>
+					<!-- end box_style_1 -->
+
+
+
+					<div class="row">
+						<div class="col-lg-3">
+							<h3>最新評論-共<%= reviews.length %>則</h3>
+							<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#myReview">撰寫評論</a>
+						</div>
+						<div class="col-lg-9">
+							<% reviews.forEach(function(reviews) { %>	
+							<div class="review_strip_single">
+								<img src="map/img/skateboard.png" alt="Image" class="rounded-circle">
+								<small> - <%= reviews.updatedAt.toLocaleString('en-US', { 
+									timeZone: 'Asia/Taipei',
+									year: 'numeric', 
+									month: 'short', 
+									day: '2-digit'
+								  }) %> -</small>
+								<h4><%= reviews.username %></h4>
+								<h4>"<%= reviews.content %>"</h4>
+								<div class="rating">
+									<% for (let i = 1; i <= 4; i++) { %>
+									  <% if (i <= reviews.score) { %>
+										<i class="icon-smile voted"></i>
+									  <% } else { %>
+										<i class="icon-smile"></i>
+									  <% } %>
+									<% } %>
+								</div>								  
+							</div>
+							<% }) %>
+							<!-- End review strip -->
+						</div>
+					</div>
+				</div>
+				<!-- End col-md-8--> 
+
+				<aside class="col-lg-3 add_bottom_30">
+
+					<div class="widget">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+						</span>
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- End Search -->
+					<hr>
+					<a href="#" class="btn_1 outline" data-bs-toggle="modal" data-bs-target="#upload-cover">封面圖上傳</a> 
+					<a href="#" class="btn_1 outline" data-bs-toggle="modal" data-bs-target="#upload">宣傳圖上傳</a> 
+					<hr>
+					<div class="widget tags">
+						<h4>Tags</h4>
+						<a href="/skateboard.map.spot/events">技術板Shortboard</a>
+						<a href="/skateboard.map.spot/events">交通板Cruiser</a>
+						<a href="/skateboard.map.spot/events">長板Longboard</a>
+						<a href="/skateboard.map.spot/events">小魚板Mini Cruiser</a>
+						<a href="/skateboard.map.spot/events">衝浪滑板Surfskate</a>
+						<a href="/skateboard.map.spot/events">電動滑板Electric</a>
+						<a href="/skateboard.map.spot/events">蛇板Snakeboard</a>
+					</div>
+					<!-- End widget -->
+
+				</aside>
+				<!-- End aside -->
+
+
+			</div>
+			<!--End row -->
+		</div>
+		<!--End container -->
+        
+        <div id="overlay"></div>
+		<!-- Mask on input focus -->
+        
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footerSingle') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+		
+	<!-- Review -->
+	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">撰寫評論</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/handleAddReview">
+						<input name="eventId" id="tour_name" type="hidden" value="<%= Event.id %>">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input name="username" id="name_review" type="text" placeholder="顯示的名稱" class="form-control" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<select class="form-select" name="score" id="quality_review" required>
+										<option value="">請給分-滿分四顆</option>
+										<option value="1">1顆輪子</option>
+										<option value="2">2顆輪子</option>
+										<option value="3">3顆輪子</option>
+										<option value="4">4顆輪子</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="form-group">
+							<textarea name="content" id="review_text" class="form-control" style="height:100px" placeholder="您對這個活動的想法、建議或任何想分享的事"></textarea>
+						</div>
+						<div class="row">
+							<script src='https://www.google.com/recaptcha/api.js'></script>
+							<div class="col-md-6">
+								<!-- <label>Human verification</label> -->
+								<div class="g-recaptcha col-md-6" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+								<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>        
+				
+								<input type="submit" value="Submit" class="btn_1 green" id="">
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal review -->
+
+	<!-- Picture-cover  -->
+	<div class="modal fade" id="upload-cover" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">上傳活動封面圖片</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/uploadEvent" enctype="multipart/form-data">
+						<input name="EventId" type="hidden" value="<%= Event.id %>">
+						<input name="tag" type="hidden" value="cover">
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>建議上傳長寬比1.5:1且圖片小於10MB</b></label><br>
+								<label><i class="fa icon-ok"></i><b>一次限制上傳一張</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<script src='https://www.google.com/recaptcha/api.js'></script>
+								<div class="col-md-6">
+									<!-- <label>Human verification</label> -->
+									<div class="g-recaptcha col-md-6" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+									<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>        
+									</div>		
+								<button type="submit" class="btn_1 green" id="js-upload-submit">上傳照片</button>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+
+	<!-- Picture -->
+	<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">上傳活動宣傳圖片</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/uploadEvent" enctype="multipart/form-data">
+						<input name="EventId" type="hidden" value="<%= Event.id %>">
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>建議上傳圖片應小於10MB。</b></label><br>
+								<label><i class="fa icon-ok"></i><b>一次限制上傳一張，總上限為8張。</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<script src='https://www.google.com/recaptcha/api.js'></script>
+								<div class="col-md-6">
+									<!-- <label>Human verification</label> -->
+									<div class="g-recaptcha col-md-6" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+									<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>        
+									</div>		
+								<button type="submit" class="btn_1 green" id="js-upload-submit">上傳照片</button>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+	
+	
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- Gallery -->
+	<script src="map/js/jquery.sliderPro.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function ($) {
+			$('#Img_carousel').sliderPro({
+				width: 960,
+				height: 500,
+				fade: true,
+				arrows: true,
+				buttons: false,
+				fullScreen: false,
+				smallSize: 500,
+				startSlide: 0,
+				mediumSize: 1000,
+				largeSize: 3000,
+				thumbnailArrows: true,
+				autoplay: false
+			});
+		});
+	</script>
+
+	<!-- Date and time pickers -->
+    <script>
+    $(function() {
+      $('input.date-pick').daterangepicker({
+          autoUpdateInput: true,
+          singleDatePicker: true,
+          autoApply: true,
+          minDate:new Date(),
+          showCustomRangeLabel: false,
+          locale: {
+            format: 'MM-DD-YYYY'
+          }
+          }, function(start, end, label) {
+          console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('DD-MM-YYYY') + ' (predefined range: ' + label + ')');
+        });
+      $('input.time-pick').timepicker({
+            minuteStep: 15,
+            showInpunts: false
+        })
+    });
+    </script>
+    
+	<!--Review modal validation -->
+	<script src="map/assets/validate.js"></script>
+
+	<!-- Map -->
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="map/js/map.js"></script>
+	<script src="map/js/infobox.js"></script>
+
+	<div id="spotsData" data-spots="<%= JSON.stringify(Event) %>"></div>
+	<script>
+		var spots = document.getElementById('spotsData').getAttribute('data-spots');
+		var AllSpots = JSON.parse(spots);
+		var content = AllSpots.detail;
+		var cleanedContent = content.replace(/<\/?[^>]+(>|$)/g, '');
+
+		var descriptionMeta = document.querySelector('meta[name="description"]');
+		if (descriptionMeta) {
+		descriptionMeta.setAttribute('content', cleanedContent);
+		}
+
+		var ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+		if (ogDescriptionMeta) {
+		ogDescriptionMeta.setAttribute('content', cleanedContent);
+		}
+
+	</script>
+	
+	
+</body>
+
+</html>

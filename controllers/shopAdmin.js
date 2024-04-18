@@ -1,0 +1,310 @@
+const db = require('../models')
+const Product = db.Product
+const User = db.User
+const Order = db.Order
+
+const config = require('../config');
+
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const cache = require("../utils/cache");
+
+const { sendMail, payMail } = require('../utils/sendMail')
+
+// imgur
+const imgur = require('imgur-node-api')
+const IMGUR_CLIENT_ID = config.IMGUR_CLIENT_ID
+const uploadImg = path => {
+  return new Promise((resolve, reject) => {
+    imgur.upload(path, (err, img) => {
+      if (err) {
+        return reject(err)
+      }
+      return resolve(img)
+    })
+  })
+}
+
+const adminController = {
+  loginPage: (req, res) => {
+    const email = req.session.email
+    return res.render('admin/login', { email })
+  },
+  login: async (req, res, next) => {
+    try {
+      const { email, password } = req.body
+      const user = await User.findOne({ where: { email } })
+      req.session.email = email
+      if (!user) {
+        req.flash('warning_msg', 'Email incorrect!')
+        return res.status(401).redirect('/admin/login')
+      }
+      if (user.role !== 'admin') {
+        req.flash('danger_msg', 'No authority!')
+        return res.status(403).redirect('/admin/login')
+      }
+      if (!bcrypt.compareSync(password, user.password)) {
+        req.flash('warning_msg', 'Password incorrect!')
+        return res.status(401).redirect('/admin/login')
+      }
+      // token
+      const payload = { id: user.id }
+      const expiresIn = { expiresIn: '10h' }
+      const token = jwt.sign(payload, config.JWT_SECRET, expiresIn)
+      // 使用 node-cache
+      const lifetime = 60 * 60 * 6 // seconds
+      cache.set("token", token, lifetime);
+      console.log('Token set in cache: ', token);
+  
+      req.flash('success_msg', 'Login Success!')
+      return res.status(200).redirect('/admin')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  logout: async (req, res, next) => {
+    try {
+      await new Promise((resolve, reject) => {
+        req.logout(function (err) {
+          if (err) {
+            console.log(err);
+            return reject(err);
+          }
+          resolve();
+        });
+      });
+  
+      req.session.token = '';
+      req.session.email = '';
+  
+      cache.del('token', (err) => {
+        if (err) {
+          console.log(err);
+          return next(err);
+        }
+      });
+  
+      req.flash('success_msg', 'Logout Success!');
+      return res.status(200).redirect('/admin/login');
+    } catch (error) {
+      // Handle any errors that occurred during logout
+      console.error(error);
+      return next(error);
+    }
+  },
+
+  // get all products
+  getProducts: async (req, res, next) => {
+    try {
+      const products = await Product.findAll({
+        raw: true,
+        nest: true,
+        where: { deletedAt: null }
+      })
+      return res.render('admin/shop/products', { products })
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  productNew: (req, res) => {
+    return res.render('admin/shop/productNew')
+  },
+  // create new product
+  postProduct: async (req, res, next) => {
+    try {
+      const { name, description, price, inventory } = req.body
+      if (req.file) {
+        imgur.setClientID(IMGUR_CLIENT_ID)
+        const img = await uploadImg(req.file.path)
+        // 測試img的內容
+        await Product.create({ name, description, price, inventory, image: img.data.link })
+      } else {
+        await Product.create({ name, description, price, inventory })
+      }
+      req.flash('success_msg', 'Product Create Success!')
+      return res.status(204).redirect('/admin/products')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // edit product page
+  editProduct: async (req, res, next) => {
+    try {
+      // set status 判斷是編輯還是新增
+      const status = 1
+      // find the product
+      const product = await Product.findByPk(req.params.id)
+      // find products
+      const products = await Product.findAll({
+        raw: true,
+        nest: true
+      })
+      return res.render('admin/shop/productEdit', { product: product.toJSON(), products, status })
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  }, 
+  // edit product
+  putProduct: async (req, res, next) => {
+    try { 
+      const { name, description, price, inventory } = req.body
+      const product = await Product.findByPk(req.params.id)
+      if (req.file) {
+        imgur.setClientID(IMGUR_CLIENT_ID)
+        const img = await uploadImg(req.file.path)
+        await product.update({ name, description, price, inventory, image: img.data.link })
+      } else {
+        await product.update({ name, description, price, inventory, image: product.image })
+      }
+      // 測試能不能換成name
+      req.flash('success_msg', `Product Id:${req.params.id} Edit Success!`)
+      return res.status(204).redirect('/admin/products')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // delete product
+  deleteProduct: async (req, res, next) => {
+    try {
+      const product = await Product.findByPk(req.params.id)
+      if (!product) {
+        req.flash('warning_msg', '這個商品不存在!')
+      }
+      if (product.deletedAt !== null) {
+        req.flash('warning_msg', '這個商品已經被刪除了!')
+      }
+      await product.update({
+        // 可改成日期
+        deletedAt: 1
+      })
+      req.flash('success_msg', `Product Id:${req.params.id} Delete Success!`)
+      return res.status(200).redirect('back')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // get orders
+  getOrders: async (req, res, next) => {
+    try {
+      const orders = await Order.findAll({
+        raw: true,
+        nest: true
+      })
+      return res.render('admin/shop/orders', { orders })
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // get order
+  getOrder: async (req, res, next) => {
+    try {
+      const order = await Order.findByPk(req.params.id, {
+        include: 'orderProducts'
+      })
+      return res.render('admin/shop/order', { order: order.toJSON() })
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  // ship order
+  shipOrder: async (req, res, next) => {
+    try {
+      const { pickUpCode } = req.body
+      const order = await Order.findByPk(req.params.id)
+      if (!order) {
+        req.flash('warning_msg', 'can not find this order!')
+      } else {
+        await order.update({ 
+          shipping_status: 1,
+          pickUpCode
+        })
+        req.flash('success_msg', `Ship Order Id:${req.params.id} Success!`)
+        // send mail
+        const user = await User.findByPk(order.UserId)
+        const email = user.toJSON().email
+        const subject = `[SpotsMap 滑板地圖]你的訂單出貨囉！ #${order.id}!`
+        const status = '已出貨'
+        const msg = '請留意到貨簡訊通知!'
+        sendMail(email, subject, payMail(order, status, msg))
+      }
+      return res.status(200).redirect('back')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // cancel order
+  cancelOrder: async (req, res, next) => {
+    try {
+      const order = await Order.findByPk(req.params.id)
+      if (!order) {
+        req.flash('warning_msg', 'can not find this order!')
+      } else {
+        await order.update({ shipping_status: -1 })
+        req.flash('success_msg', `Cancel Order Id:${req.params.id} Success!`)
+      }
+      return res.status(200).redirect('back')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // recover order
+  recoverOrder: async (req, res, next) => {
+    try {
+      const order = await Order.findByPk(req.params.id)
+      if (!order) {
+        req.flash('warning_msg', 'can not find this order!')
+      } else {
+        await order.update({ shipping_status: 0 })
+        req.flash('success_msg', `Recover Order Id:${req.params.id} Success!`)
+      }
+      return res.status(200).redirect('back')
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // get users
+  getUsers: async (req, res, next) => {
+    try {
+      const users = await User.findAll({
+        raw: true,
+        nest: true
+      })
+      return res.status(200).render('admin/shop/users', { users, me: req.user  } ) 
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  },
+  // change auth
+  changeAuth: async (req, res, next) => {
+    try {
+      const user = await User.findByPk(req.params.id)
+      if (!user) {
+        req.flash('warning_msg', 'can not find this user!')
+      } else {
+        if (user.role === 'admin') {
+          await user.update({ role: 'user' })
+        } else {
+          await user.update({ role: 'admin' })
+        }
+        req.flash('success_msg', `Id${user.id}: Change Auth to ${user.role} Success!`)
+        return res.status(200).redirect('/admin/authority')
+      }
+    } catch (e) {
+      console.log(e)
+      return next(e)
+    }
+  }
+}
+
+module.exports = adminController

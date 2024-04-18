@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+	<base href="/">
+	<%- include('../share/head') %>
+	<!-- CUSTOM CSS -->
+    <link href="map/css/shop.css" rel="stylesheet">
+	<link href="map/css/custom.css" rel="stylesheet">
+	<style>
+		item_cart a:hover {
+			color: #c0b9b9ea
+		}
+	</style>
+</head>
+
+<body> 
+
+	<%- include('../partials/preloader') %>
+	<!-- Header================================================== -->
+	<%- include('../share/header-shop') %>	
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-lg-8 add_bottom_15">
+					<div class="form_title">
+						<h3><strong><i class="icon-tag-1"></i></strong>
+							配送狀態：										
+							<% if (order.shipping_status === '1') { %>已出貨<% } %>
+							<% if (order.shipping_status === '0') { %>備貨中<% } %>
+							<% if (order.shipping_status === '-1') { %>已取消<% } %>
+                        </h3>
+						<p>
+							以下為包裹內容，感謝您的訂購。
+						</p>
+					</div>
+					<div class="step">
+						<table class="table table-striped cart-list shopping-cart">
+							<thead>
+								<tr>
+									<th>
+										商品資訊
+									</th>
+									<th>
+										數量
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% if (typeof order !== 'undefined') { %>
+									<% order.orderProducts.forEach(function(item) { %>
+									  <tr>
+										<td>
+										  <div class="thumb_cart">
+											<a href="/skateboard.map.spot/product/<%= item.OrderItem.ProductId %>"><img src="<%= item.image %>" alt="" loading="lazy"></a>
+										  </div>
+										  <strong class="item_cart"><a href="/skateboard.map.spot/product/<%= item.OrderItem.ProductId %>"><%= item.name %></a></strong>
+										</td>
+										<td>
+										  <strong><%= item.OrderItem.quantity %>件</strong>
+										</td>
+									  </tr>
+									<% }) %>
+								  <% } %>						
+							</tbody>
+						</table>
+					</div>
+					<!--End step -->
+
+					<div class="form_title">
+						<h3><strong><i class="icon-tag-1"></i></strong>取貨編號：<%= order.pickUpCode %></h3>
+						<p>
+							點此前往<a href="https://tracking.shopmore.com.tw/" target="_blank">7-11貨態查詢系統<i class="icon-link-ext"></i></a>
+						</p>
+					</div>
+					<div class="step">
+						<table class="table table-striped confirm">
+							<thead>
+								<tr>
+									<th colspan="2">
+										訂單資訊
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<i class="icon-truck-1"></i><strong>配送門市</strong>
+									</td>
+									<td>
+										<%= order.address %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class="icon-barcode-1"></i><strong>付款方式</strong>
+									</td>
+									<td>
+										取貨付款
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class="icon-user"></i><strong>收件人</strong>
+									</td>
+									<td>
+										<%= order.name %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class="icon-phone-1"></i><strong>收件人電話</strong>
+									</td>
+									<td>
+										<%= order.phone %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class="icon-credit-card"></i><strong>總金額</strong>
+									</td>
+									<td>
+										NT$<%= order.amount %>元
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class=" icon-flight"></i><strong>配送進度</strong>
+									</td>
+									<td>
+										<% if (order.shipping_status === '1') { %>已出貨<% } %>
+										<% if (order.shipping_status === '0') { %>備貨中<% } %>
+										<% if (order.shipping_status === '-1') { %>已取消<% } %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<i class="icon-calendar-1"></i><strong>訂單日期</strong>
+									</td>
+									<td>
+										<%= order.updatedAt.toLocaleDateString('zh-TW') %>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+						<!-- Item End -->
+					</div>
+					<!--End step -->
+				</div>
+				<!--End col -->
+
+			</div>
+			<!--End row -->
+		</div>
+		<!--End container -->
+	</main>
+	<!-- End main -->
+
+	<%- include('../share/footer') %>	
+	<!-- End footer -->
+	<%- include('../partials/scripts') %>
+	<%- include('../partials/message') %>
+
+
+	<!-- Fixed sidebar -->
+	<script src="js/theia-sticky-sidebar.js"></script>
+	<script>
+		jQuery('#sidebar').theiaStickySidebar({
+			additionalMarginTop: 80
+		});
+	</script>
+	
+
+</body>
+
+</html>

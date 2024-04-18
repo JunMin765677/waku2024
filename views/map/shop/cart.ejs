@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+	<base href="/">
+	<%- include('../share/head') %>
+	<!-- CUSTOM CSS -->
+    <link href="map/css/shop.css" rel="stylesheet">
+	<link href="map/css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<%- include('../partials/preloader') %>
+	<!-- Header================================================== -->
+	<%- include('../share/header-shop') %>	
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<%- include('../partials/message') %>
+			<div class="cart-section">
+                
+				<table class="table table-striped cart-list shopping-cart desktop-table">
+					<thead>
+						<tr>
+							<th>
+								商品資訊
+							</th>
+							<th>
+								單件價格
+							</th>
+							<th>
+								數量
+							</th>
+							<th>
+								小計
+							</th>
+							<th>
+								
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if (typeof cart !== 'undefined') { %>
+							<% cart.cartProducts.forEach(function(item) { %>
+							  <tr>
+								<td>
+								  <div class="thumb_cart">
+									<a href="#"><img src="<%= item.image %>" alt="" loading="lazy"></a>
+								  </div>
+								  <strong class="item_cart"><%= item.name %></strong>
+								</td>
+								<td>
+								  <strong>$<%= item.price %></strong>
+								</td>
+								<td>
+									<div class="numbers-row">
+										  <input type="text" value="<%= item.CartItem.quantity %>" class="qty2 form-control" name="quantity_1">
+										  <form action="/skateboard.map.spot/cartItem/<%= item.CartItem.id %>/add" method="POST">
+											<button type="submit" class="inc button_inc">+</button>
+										  </form>
+										  <form action="/skateboard.map.spot/cartItem/<%= item.CartItem.id %>/sub" method="POST">
+											<button type="submit" class="dec button_inc">-</button>
+										  </form>
+									</div>								
+								</td>
+								<td>
+								  <strong>$<%= item.price * item.CartItem.quantity  %></strong>
+								</td>
+								<td class="options">
+									<form id="CartForm_<%= item.CartItem.id %>" action="/skateboard.map.spot/cartItem/<%= item.CartItem.id %>?_method=DELETE" method="POST">
+										<!-- <button type="submit"><i class="icon-trash"></i></button> -->
+										<a href="#" onclick="CartForm('<%= item.CartItem.id %>')"><i class="icon-trash"></i></a>
+									</form>
+								</td>
+							  </tr>
+							<% }) %>
+						  <% } %>						
+					</tbody>
+				</table>
+
+				<!-- media -->
+				<table class="table table-striped cart-list shopping-cart mobile-table">
+					<thead>
+						<tr>
+							<th>
+								商品資訊
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								
+							</th>
+							<th>
+								
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if (typeof cart !== 'undefined') { %>
+							<% cart.cartProducts.forEach(function(item) { %>
+							  <tr>
+								<td>
+								  <div class="thumb_cart">
+									<a href="#"><img src="<%= item.image %>" alt="" loading="lazy"></a>
+								  </div>
+								</td>
+								<td>
+									<strong><%= item.name %></strong><br>
+									<strong>$<%= item.price %></strong>
+									<div class="numbers-row">
+										<input type="text" value="<%= item.CartItem.quantity %>" class="qty2 form-control" name="quantity_1">
+										<form action="/skateboard.map.spot/cartItem/<%= item.CartItem.id %>/add" method="POST">
+										  <button type="submit" class="inc button_inc">+</button>
+										</form>
+										<form action="/skateboard.map.spot/cartItem/<%= item.CartItem.id %>/sub" method="POST">
+										  <button type="submit" class="dec button_inc">-</button>
+										</form>
+									</div>								
+								</td>
+								<td>
+								  <strong>$<%= item.price * item.CartItem.quantity  %></strong>
+								</td>
+								<td class="options">
+									<form id="CartForm_<%= item.CartItem.id %>" action="/skateboard.map.spot/cartItem/<%= item.CartItem.id %>?_method=DELETE" method="POST">
+										<!-- <button type="submit"><i class="icon-trash"></i></button> -->
+										<a href="#" onclick="CartForm('<%= item.CartItem.id %>')"><i class="icon-trash"></i></a>
+									</form>
+								</td>
+							  </tr>
+							<% }) %>
+						  <% } %>						
+					</tbody>
+				</table>
+				<!-- media -->
+
+
+				<div class="cart-options clearfix">
+					<!-- <div class="float-start">
+						<div class="apply-coupon">
+							<div class="form-group">
+								<input type="text" name="coupon-code" value="" placeholder="Your Coupon Code" class="form-control">
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn_cart_outine">Apply Coupon</button>
+							</div>
+						</div>
+					</div> -->
+					<div class="float-md-right fix_mobile">
+						<button type="button" class="btn_cart_outine nohover">全站7-11免運費</button>
+					</div>
+				</div>
+				<div class="row justify-content-end">
+					<div class="column col-lg-4 col-md-6">
+						<ul class="totals-table">
+							<li class="clearfix"><span class="col">小計</span><span class="col">NT$<%= totalPrice %></span>
+							</li>
+							<li class="clearfix total"><span class="col">總計</span><span class="col">NT$<%= totalPrice %></span>
+							</li>
+						</ul>
+						<a href="/skateboard.map.spot/order/data" class="btn_full">前往結帳 <i class="icon-left"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+
+	<%- include('../share/footer') %>	
+	<!-- End footer -->
+	<%- include('../partials/scripts') %>
+
+	<%- include('../partials/message') %>
+
+
+	<script>
+		function submitForm(productId) {
+			console.log('submitForm called for product ID:', productId);
+			const form = document.getElementById('cartForm_' + productId);
+		  
+			// 使用 Promise 確保異步處理完成後再執行 submit()
+			new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+			  form.submit();
+			});
+		  }
+	</script>
+
+	
+	</body>
+
+</html>

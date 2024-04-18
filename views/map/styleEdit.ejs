@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="zh-TW">                                 
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<!-- SPECIFIC CSS -->
+	<link href="map/css/shop.css" rel="stylesheet">
+
+	<!-- SPECIFIC CSS - GRID GALLERY -->
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="map/css/finaltilesgallery.css" rel="stylesheet">
+	<link href="map/css/lightbox2.css" rel="stylesheet"> -->
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<hr>
+		<hr>
+		<div id="position" style=" background-color: #dadce1;">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/styles">找風格</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End position -->
+
+		<div class="container margin_60">
+			<!-- <div class="banner_2">
+				<div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)" style="background-color: rgba(0, 0, 0, 0.3);">
+					<div>
+						<h3>Your Style<br>Your Statement<br></h3>
+						<p></p>
+						<a href="/skateboard.map.spot/styles" class="btn_1">回前頁Back</a>
+					</div>
+				</div>
+			</div> -->
+			<!-- /banner_2 -->
+
+			<div class="row">
+				<div class="col-lg-8">
+
+					<div class="product-details">
+                        
+						<div class="basic-details">
+							<div class="row">
+								<div class="image-column col-6 col-md-6 col-sm-6">
+									<% if (skater.StylePictures.length > 0) { %>
+										<figure class="image-box"><img src="<%= skater.StylePictures[0].picture %>" alt=""></figure>
+									<% }else{ %>
+										<figure class="image-box"><img src="map/img/test.jpg" alt=""></figure>
+									<% } %>
+
+									<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#cover" style="background-color: #75889e; color: #ffffff;">封面上傳</a>
+								</div>
+								<div class="info-column col-6 col-md-6 col-sm-6" style="align-items: center; display: flex;">
+								  <!-- form1 start -->
+									<div class="details-header">
+										Name: <b><%= skater.name %></b>
+										<br><br>
+										Current city: <b><%= skater.city %></b>
+										<br><br>
+										Instagram: <b><a href="<%= skater.igURL %>" target="_blank"><%= skater.ig %></a></b>
+										<br><br>
+										Skating for: <b><%= skater.years %></b>
+										<br><br>
+										My rules(信念): <b><%= skater.rules %></b>
+										<br><br>
+										<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#basicDetails" style="background-color: #75889e; color: #ffffff;">更新</a>
+									</div>
+								  <!-- form1 end -->
+								</div>
+							</div>
+						</div>
+						<!--End Basic Details-->
+
+						<div class="product-info-tabs">
+							<div class="prod-tabs" id="product-tabs">
+								<!-- choose -->
+								<div class="tab-btns clearfix">
+									<a href="#prod-Photos" class="tab-btn active-btn">Snap</a>
+									<a href="#prod-Setup" class="tab-btn">Setup & OOTD</a>
+									<a href="#prod-Setting" class="tab-btn">設定</a>
+								</div>
+
+                                <!-- content -->
+								<div class="tabs-container">
+
+                                    <!-- Tab1 -->
+									<div class="tab active-tab" id="prod-Photos">
+										<div class="isotope-wrapper">
+											<div class="row magnific-gallery">
+												<% if (detail.length === 0) { %>
+												<% }else{ %>
+													<% for (var i = 0; i < detail.length; i++) { %>
+														<div class=" col-6 col-md-3 col-sm-6 isotope-item">
+															<div class="img_wrapper_gallery">
+																<div class="img_container_gallery">
+																	<a href="<%= detail[i].picture %>" title="Photo title" data-effect="mfp-zoom-in"><img src="<%= detail[i].picture %>" alt="Image" class="img-fluid">
+																		<i class="icon-resize-full-2"></i>
+																	</a>
+																</div>
+															</div>
+														</div>
+													<% } %>
+												<% } %>
+											</div>
+										</div>
+										<br>
+										<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#Photos" style="background-color: #75889e; color: #ffffff;">編輯</a>
+									</div>
+									<!--End Tab1-->
+
+                                    <!-- Tab2 -->
+									<div class="tab" id="prod-Setup">
+										<h3>《Setup》</h3>
+										<br>
+										<div class="reviews-container">
+											<p>Deck: <b><%= skater.deck %></b></p>
+											<p>Trucks: <b><%= skater.trucks %></b></p>
+											<p>Wheels: <b><%= skater.wheels %></b></p>
+											<p>Bushings: <b><%= skater.bushings %></b></p>
+											<p>Bearings: <b><%= skater.bearings %></b></p>
+										</div>
+										<br>
+										<h3>《Fashion》</h3>
+										<br>
+										<div class="reviews-container">
+											<p>Favorite brands: <b><%= skater.brands %></b></p>
+											<p>Tops: <b><%= skater.tops %></b></p>
+											<p>Bottoms: <b><%= skater.bottoms %></b></p>
+											<p>Sneakers: <b><%= skater.sneakers %></b></p>
+											<p>Cap: <b><%= skater.cap %></b></p>
+											<p>Socks: <b><%= skater.socks %></b></p>
+											<p>Accessories(配件): <b><%= skater.accessories %></b></p>
+										</div>
+										<br>
+										<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#Setup" style="background-color: #75889e; color: #ffffff;">更新</a>
+									</div>
+									<!--End Tab2-->
+
+									<!-- Tab3 -->
+									<div class="tab" id="prod-Setting">
+										<h3>《設定 Setting》</h3>
+										<form method="post" action="/skateboard.map.spot/updateSkater">
+										<input name="id" id="tour_name" type="hidden" value="<%= skater.id %>">
+										<table class="table table-striped options_cart">
+											<tbody>
+												<tr>
+													<td style="width:10%">
+														<i class="icon-ticket-1"></i>
+													</td>
+													<td style="width:60%">
+														設為公開
+													</td>
+													<td style="width:35%">
+														<label class="switch-light switch-ios pull-right">
+															<input type="checkbox" name="checkbox" id="myCheckbox" <% if (skater.public === 'on') { %>checked<% } %>>
+															<input type="hidden" name="public" id="checkboxValue">
+
+															<span>
+															<span>No</span>
+															<span>Yes</span>
+															</span>
+															<a></a>
+														</label>
+													</td>
+												</tr>
+											</tbody>
+
+										</table>
+										<input type="submit" value="確認" class="btn_1 green" id="" style="background-color: #75889e; color: #ffffff;">
+									</form>
+		
+									</div>
+									<!--End Tab3-->
+									
+
+								</div>
+								<!--End tabs-container-->
+							</div>
+							<!--End prod-tabs-->
+						</div>
+						<!--End product-info-tabs-->
+
+					</div>
+					<!--End Product-details-->
+				</div>
+				<!--End Col-->
+
+				<aside class="col-lg-4" id="sidebar">
+					<!-- <p class="d-none d-xl-block d-lg-block">
+						<a class="btn_map" href="">登出 Logout</a>
+					</p> -->
+					<div class="theiaStickySidebar">
+						<div class="box_style_1">
+							<h3 class="inner">= Real Skater =</h3>
+							<div class="row">
+								<div class="col-9 " >
+									<h5> Hi~  <%= skater.email %> </h5>
+									<p> 
+										<% if(skater.public === 'on') { %>
+										 隱私設定:公開
+										<% } else { %>
+										 隱私設定:不公開
+										<% } %>
+									</p>
+								</div>
+							    <div class="col-3">
+									<!-- <img alt="Image" class="sp-image" src="<%= skater.photo %>" > -->
+								</div>
+							</div>
+							<a class="btn_full_outline" href="/skateboard.map.spot/logout">登出Logout</a>
+						</div>
+						<!--/box_style_1 -->
+					</div>
+					<!--/sticky -->
+
+				</aside>
+
+
+			</div>
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+		
+	<!-- basic-details Popup -->
+	<div class="modal fade" id="basicDetails" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">基本資訊 Basic Details</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/updateSkater">
+						<input name="id" id="tour_name" type="hidden" value="<%= skater.id %>">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Name</label>
+									<input name="name" type="text" value="<%= skater.name %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>所在城市 Current city</label>
+									<input name="city" type="text" value="<%= skater.city %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Instagram ID</label>
+									<input name="ig" type="text" value="<%= skater.ig %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Instagram URL 連結</label>
+									<input name="igURL" type="text" value="<%= skater.igURL %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>滑板年資 Skating for</label>
+									<input name="years" type="text" value="<%= skater.years %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>My rules(信念)</label>
+									<input name="rules" type="text" value="<%= skater.rules %>" class="form-control">
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">				
+							<input type="submit" value="確認更新" class="btn_1 green" id="" style="background-color: #75889e; color: #ffffff;">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End basic-details Popup -->
+
+	<!-- cover  -->
+	<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">封面cover</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/uploadStyle" enctype="multipart/form-data">
+						<input name="SkaterId" type="hidden" value="<%= skater.id %>">
+						<input name="tag" type="hidden" value="cover">
+						<input name="existed" type="hidden" value="<%= skater.StylePictures.length %>">
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>圖片應小於10MB</b></label><br>
+								<label><i class="fa icon-ok"></i><b>一次限制上傳一張</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<button type="submit" class="btn_1 green" id="js-upload-submit" style="background-color: #75889e; color: #ffffff;">上傳照片</button>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+	
+	<!-- SNAP -->
+	<div class="modal fade" id="Photos" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">Stuff Snap</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="/skateboard.map.spot/uploadStyle" enctype="multipart/form-data"> 
+						<input name="SkaterId" type="hidden" value="<%= skater.id %>">
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>建議上傳圖片應小於10MB。</b></label><br>
+								<label><i class="fa icon-ok"></i><b>單次可上傳5張，總上限為10張。</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<button type="submit" class="btn_1 green" id="js-upload-submit" style="background-color: #75889e; color: #ffffff;">確認上傳</button>
+							</div>	
+						</div>
+					</form>
+					<br>
+					<div id="message-review">
+						<div class="row">
+							<label><i class="fa icon-ok"></i><b>已上傳編輯區(依上傳時間排序)</b></label>
+							<form method="post" action="/skateboard.map.spot/deletePicture">
+								<% for (var i = 0; i < detail.length; i++) { %>
+									<label><input class="form-check-input" type="checkbox" name="deleteItem" value="<%= detail[i].id %>" id="defaultCheck1"><i class="fa icon-picture"></i><%= detail[i].content %></label><br>
+								<% } %>
+								<button type="submit" class="btn_1 green" style="background-color: #75889e; color: #ffffff;">確認刪除</button>
+							</form>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+
+	<!-- Setup Popup -->
+	<div class="modal fade" id="Setup" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">配置Setup & 穿搭Fashion</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/updateSkater">
+						<input name="id" id="tour_name" type="hidden" value="<%= skater.id %>">
+						<div class="row">
+							<div class="col-md-6">
+								<h5>《Setup》</h5>
+								<div class="form-group">
+									<label>板身Deck</label>
+									<input name="deck" type="text" value="<%= skater.deck %>" class="form-control" required>
+								</div>
+								<div class="form-group">
+									<label>輪架Trucks</label>
+									<input name="trucks" type="text" value="<%= skater.trucks %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>輪子Wheels</label>
+									<input name="wheels" type="text" value="<%= skater.wheels %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>輪架櫬套Bushings</label>
+									<input name="bushings" type="text" value="<%= skater.bushings %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>培林Bearings</label>
+									<input name="bearings" type="text" value="<%= skater.bearings %>" class="form-control">
+								</div>
+								<h5>《Fashion》</h5>
+								<div class="form-group">
+									<label>最愛的滑板or服飾品牌Favorite brands</label>
+									<input name="brands" type="text" value="<%= skater.brands %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>上身Tops</label>
+									<input name="tops" type="text" value="<%= skater.tops %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>下身Bottoms</label>
+									<input name="bottoms" type="text" value="<%= skater.bottoms %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>鞋Sneakers</label>
+									<input name="sneakers" type="text" value="<%= skater.sneakers %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>帽Cap</label>
+									<input name="cap" type="text" value="<%= skater.cap %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>襪Socks</label>
+									<input name="socks" type="text" value="<%= skater.socks %>" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>配件Accessories</label>
+									<input name="accessories" type="text" value="<%= skater.accessories %>" class="form-control">
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">				
+							<input type="submit" value="確認更新" class="btn_1 green" id="" style="background-color: #75889e; color: #ffffff;">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Setup Popup -->
+	
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<script>
+		if ($('.prod-tabs .tab-btn').length) {
+			$('.prod-tabs .tab-btn').on('click', function (e) {
+				e.preventDefault();
+				var target = $($(this).attr('href'));
+				$('.prod-tabs .tab-btn').removeClass('active-btn');
+				$(this).addClass('active-btn');
+				$('.prod-tabs .tab').fadeOut(0);
+				$('.prod-tabs .tab').removeClass('active-tab');
+				$(target).fadeIn(500);
+				$(target).addClass('active-tab');
+			});
+
+		}
+	</script>
+
+	<!--Review modal validation -->
+	<script src="map/assets/validate.js"></script>
+
+	<!-- Specific scripts - Grid gallery -->
+	<script src="map/js/jquery.finaltilesgallery.js"></script>
+	<script src="map/js/lightbox2.js"></script>
+	<script>
+		$(function () {
+			'use strict';
+			//we call Final Tiles Grid Gallery without parameters,
+			//see reference for customisations: http://final-tiles-gallery.com/index.html#get-started
+			$(".final-tiles-gallery").finalTilesGallery();
+		});
+	</script>
+
+	<!-- Fixed sidebar -->
+	<script src="map/js/theia-sticky-sidebar.js"></script>
+	<script>
+		jQuery('#sidebar').theiaStickySidebar({
+			additionalMarginTop: 80
+		});
+	</script>
+    
+	<!-- checkbox -->
+	<script>
+		const checkbox = document.getElementById('myCheckbox');
+		const public = document.getElementById('checkboxValue');
+	
+		checkbox.addEventListener('change', function() {
+		if (this.checked) {
+			public.value = 'on';
+		} else {
+			public.value = 'off';
+		}
+		});
+	</script>	  
+
+	<!-- Masonry filter -->
+	<script src="map/js/isotope.min.js"></script>
+	<script>
+	$(window).on('load',function(){
+		var $container = $('.isotope-wrapper'),
+			filters = {};
+
+		$container.isotope({
+		itemSelector : '.isotope-item'
+		});
+	});
+	</script>
+	
+	
+
+</body>
+
+</html>

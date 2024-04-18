@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <%- include('shared/head') %>
+  </head>
+  <body>
+    
+    <%- include('shared/nav') %>
+    		  
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-2">
+		<div class="col-md-4 heading-section ftco-animate">
+			<span class="subheading subheading-with-line"><small class="pr-2 bg-light">Social Media</small></span>
+			<h2 class="mb-4">Front-End Web Development</h2>
+		</div>
+		<div class="col-md-8 pl-md-5 heading-section ftco-animate">
+			<div class="pl-md-4 border-line">
+				<p>這裡展示我如何透過整合<b>Google Maps API和Summernote Editor</b>來豐富前端網頁開發。利用<b>RWD響應式設計和Google Analytics數據</b>，有效提升用戶體驗與互動參與度（user engagement），展現技術與創意的結合。</p>
+			</div>
+		</div>
+		</div>
+		</div>
+		<div class="container">
+		<div class="row" style="row-gap: 10px;">
+			<% frontend.forEach(function(project) { %>
+			<div class="col-6 col-md-6 col-lg-3 ftco-animate">
+				<div class="project" style="background-color: rgb(172, 174, 174);">
+					<img src="<%= project.image %>" class="img-fluid" alt="Colorlib Template">
+					<div class="text">
+						<span>frontend Projects</span>
+						<h3><a href="project.html"></a></h3>
+					</div>
+					<a href="<%= project.image %>" class="icon image-popup d-flex justify-content-center align-items-center" loading="lazy">
+						<span class="icon-expand"></span>
+					</a>
+				</div>
+			</div>
+			<% }) %>
+		</div>
+	</section>
+
+    
+	<!-- footer & js -->
+	<%- include('shared/footer') %>
+    
+  </body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+	<%- include('shared/head') %>
+
+	<meta name="application-name" content="WakuStudio">
+	<meta property="og:site_name" content="WakuStudio">
+	<meta name="author" content="WakuStudio">
+	<meta property="article:author" content="https://wakudesign.com">
+
+	<title>親手實現生活中的美好-WakuStudio</title>
+
+	<meta name="description">
+	<meta name="keywords" content="">
+	<meta name="url" itemprop="url" content="https://wakudesign.com">
+	<meta property="og:url"                content="https://wakudesign.com" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="親手實現生活中的美好-WakuStudio" />
+	<meta property="og:description" />
+	<link rel="canonical" href="https://wakudesign.com">
+	
+	<meta property="og:image"              content="waku/images/A02.png" />
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+
+  </head>
+  <body>
+	<%- include('shared/nav') %>
+    
+    <section class="hero-wrap hero-wrap-2 d-flex align-items-center justify-content-center" style="background-image: url('waku/images/image_1.jpg');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+		  <div class="row no-gutters slider-text align-items-center justify-content-center">
+			<div class="col-md-9 ftco-animate text-center">
+			  <h1 class="mb-2 bread">Waku</h1>
+			  <p class="breadcrumbs"><span class="mr-2"><a href="/">Jun's Portfolio</i></a></span></p>
+			</div>
+		  </div>
+		</div>
+	</section>
+	  
+	<!-- About -->
+	<!-- <section class="ftco-section ftc-no-pb">
+		<div class="container">
+			<div class="row no-gutters">
+				<div class="col-md-5 p-md-5 img img-2" style="background-image: url(images/bg_3.jpg);">
+				</div>
+				<div class="col-md-7 wrap-about pb-md-5 ftco-animate">
+			<div class="heading-section mb-5 pl-md-5">
+			<div class="pl-md-5 ml-md-5">
+				<span class="subheading subheading-with-line"><small class="pr-2 bg-white">About</small></span>
+				<h2 class="mb-4">We are the best Interior, Exterior &amp; Architecture Firm</h2>
+			</div>
+			</div>
+			<div class="pl-md-5 ml-md-5 mb-5">
+						<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+						<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+						<p><a href="#" class="btn-custom">Learn More <span class="ion-ios-arrow-forward"></span></a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> -->
+
+	<!-- Blog -->
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-2">
+				<div class="col-md-4 heading-section ftco-animate">
+				<span class="subheading subheading-with-line"><small class="pr-2 bg-white">Blog</small></span>
+				<h2 class="mb-4">熱門文章</h2>
+				</div>
+				<div class="col-md-8 pl-md-5 heading-section ftco-animate">
+				<div class="pl-md-4 border-line">
+					<p>We hope you will enjoy the content on our website. It has been carefully crafted to provide you with valuable insights and engaging experiences.</p>
+				</div>
+				</div>
+			</div>	
+			<div class="row">
+				<% Articles.forEach(function(Articles) { %>
+					<div class="col-md-4 ftco-animate">
+					<div class="blog-entry">
+						<a href="/article/<%= Articles.id %>" class="block-20" style="background-image: url('<%= Articles.cover %>');">
+						</a>
+						<div class="text d-flex py-4">
+						<div class="meta mb-3">
+							<div><a href="#"><%= Articles.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) %></a></div>
+							<% if(Articles.author === 'A01') { %>
+								<div><a href="#">Nova & Rain</a></div>
+							<% } else if(Articles.author === 'A02') { %>
+								<div><a href="#">Aria aka芽</a></div>
+							<% } else if(Articles.author === 'A03') { %>
+								<div><a href="#">Wason BJ4</a></div>
+							<% } else if(Articles.author === 'A04') { %>
+								<div><a href="#">落雨軒 Freya</a></div>
+							<% } %>
+							<div><a href="#" class="meta-chat"><span class="icon-chat"></span></a></div>
+						</div>
+						<div class="desc pl-3">
+							<h3 class="heading"><a href="/article/<%= Articles.id %>"><%= Articles.title %></a></h3>
+							</div>
+						</div>
+					</div>
+					</div>
+				<% }) %>
+			</div>
+		</div>
+	</section>	
+
+
+	<!-- Work Flow -->
+    <!-- <section class="ftco-services">
+			<div class="container">
+			<div class="row justify-content-start mb-5 pb-5">
+          <div class="col-md-4 heading-section ftco-animate">
+            <h2 class="mb-4">Our Work Flow</h2>
+          </div>
+          <div class="col-md-8 pl-md-5 ftco-animate">
+          	<div class="pl-md-4 border-line">
+	          	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in.</p>
+          	</div>
+          </div>
+        </div>
+				<div class="row">
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon d-flex justify-content-center align-items-center">
+            		<span class="flaticon-idea"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">Perfectly Design</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon d-flex justify-content-center align-items-center">
+            		<span class="flaticon-compass-symbol"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">Carefully Planned</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+              </div>
+            </div>    
+          </div>
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services d-block">
+              <div class="icon d-flex justify-content-center align-items-center">
+            		<span class="flaticon-layers"></span>
+              </div>
+              <div class="media-body p-2 mt-3">
+                <h3 class="heading">Smartly Execute</h3>
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+              </div>
+            </div>      
+          </div>
+        </div>
+        <div class="row justify-content-start mt-5 py-5">
+          <div class="col-md-4 heading-section ftco-animate">
+            <h2 class="mb-4">Our Services</h2>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+          </div>
+          <div class="col-md-8 ftco-animate">
+          	<div class="row d-flex">
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">Design</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">Industrial Design</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">Architecture Support</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">Renovation</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+			</div>
+	</section> -->
+
+	<!-- Project -->
+    <!-- <section class="ftco-section ftco-no-pb">
+    	<div class="container">
+    		<div class="row justify-content-start mb-5 pb-2">
+          <div class="col-md-4 heading-section ftco-animate">
+          	<span class="subheading subheading-with-line"><small class="pr-2 bg-white">Projects</small></span>
+            <h2 class="mb-4">Featured Projects</h2>
+          </div>
+          <div class="col-md-8 pl-md-5 heading-section ftco-animate">
+          	<div class="pl-md-4 border-line">
+	          	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+	          	<p class="category mt-5">
+	            	<span class="active mr-2"><a href="#">All Work</a></span>
+	            	<span class="mr-2"><a href="#">Interior</a></span>
+	            	<span class="mr-2"><a href="#">Exterior</a></span>
+	            	<span class="mr-2"><a href="#">Landscape</a></span>
+	            </p>
+          	</div>
+          </div>
+        </div>
+    	</div>
+    	<div class="container-wrap">
+    		<div class="row no-gutters">
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-1.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Interior Design</span>
+	    					<h3><a href="project.html">Office Interior Design</a></h3>
+	    				</div>
+	    				<a href="waku/images/work-1.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-2.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Interior Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-2.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-3.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Interior Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-3.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-4.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Interior Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-4.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-5.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Landscape Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-5.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-6.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Exterior Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-6.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-7.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Exterior Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-7.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="project">
+	    				<img src="waku/images/work-8.jpg" class="img-fluid" alt="Colorlib Template">
+	    				<div class="text">
+	    					<span>Interior Design</span>
+	    					<h3>Office Interior Design</h3>
+	    				</div>
+	    				<a href="waku/images/work-8.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+	    					<span class="icon-expand"></span>
+	    				</a>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section> -->
+
+	<!-- <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
+    	<div class="container">
+    		<div class="row d-md-flex align-items-center justify-content-end">
+    			<div class="col-lg-10">
+    				<div class="row d-md-flex align-items-center">
+		          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18">
+		              <div class="text">
+		                <strong class="number" data-number="18">0</strong>
+		                <span>Years of Experienced</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18">
+		              <div class="text">
+		                <strong class="number" data-number="351">0</strong>
+		                <span>Happy Clients</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18">
+		              <div class="text">
+		                <strong class="number" data-number="564">0</strong>
+		                <span>Finished Projects</span>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+		            <div class="block-18">
+		              <div class="text">
+		                <strong class="number" data-number="300">0</strong>
+		                <span>Working Days</span>
+		              </div>
+		            </div>
+		          </div>
+	          </div>
+          </div>
+        </div>
+    	</div>
+    </section> -->
+
+    <!-- <section class="ftco-section testimony-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate">
+          	<span class="subheading subheading-with-line"><small class="pr-2 bg-light">Testimony</small></span>
+            <h2 class="mb-4">Our satisfied customer says</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel">
+              <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="pl-5">
+	                    <p class="name">Garreth Smith</p>
+	                    <span class="position">CEO Founder of Commercial Building</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="pl-5">
+	                    <p class="name">Garreth Smith</p>
+	                    <span class="position">CEO Founder of Interior Design</span>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="pl-5">
+	                    <p class="name">Garreth Smith</p>
+	                    <span class="position">Exterior Designer</span>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="pl-5">
+	                    <p class="name">Garreth Smith</p>
+	                    <span class="position">Landscape Designer</span>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="testimony-wrap p-4 pb-5">
+                  <div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
+                    <span class="quote d-flex align-items-center justify-content-center">
+                      <i class="icon-quote-left"></i>
+                    </span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <div class="pl-5">
+	                    <p class="name">Garreth Smith</p>
+	                    <span class="position">System Analyst</span>
+	                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+			
+	<!-- Team -->
+	<!-- <section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center mb-5 pb-3">
+		<div class="col-md-7 heading-section ftco-animate">
+		<span class="subheading subheading-with-line"><small class="pr-2 bg-white">Our Partner</small></span>
+		<h2 class="mb-4">waku 合作夥伴</h2>
+		<p>Our partners are our most valuable assets. They play an integral role in our journey towards excellence. With their expertise and collaboration, we thrive together, reaching new heights of achievement. </p>
+		</div>
+	</div>	
+			<div class="row">
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img" style="background-image: url(waku/images/A01.png);"></div>
+						<div class="text px-4 pt-4">
+							<h3>Nova & Rain</h3>
+							<span class="position mb-2">WakuStudio合作網頁前端設計師</span>
+							<div class="faded">
+								<p>打造使用者導向的用戶介面，互動體驗與品牌認同是我們的核心價值。</p>
+								<ul class="ftco-social d-flex">
+					<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+					</ul>
+				</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img" style="background-image: url(waku/images/A02.png);"></div>
+						<div class="text px-4 pt-4">
+							<h3>Aria aka芽</h3>
+							<span class="position mb-2">WakuStudio合作網頁後端設計師</span>
+							<div class="faded">
+								<p>讓一切跑得更快更有邏輯是我的專長。主攻AWS, Node.js.</p>
+								<ul class="ftco-social d-flex">
+					<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+					</ul>
+				</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img" style="background-image: url(waku/images/A03.png);"></div>
+						<div class="text px-4 pt-4">
+							<h3>Wason BJ4</h3>
+							<span class="position mb-2">WakuStudio合作AI詠唱師</span>
+							<div class="faded">
+								<p>ChatGPT不是不好用，是你還沒學會怎麼跟他溝通！</p>
+								<ul class="ftco-social d-flex">
+					<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+					</ul>
+				</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="staff">
+						<div class="img" style="background-image: url(waku/images/A04.png);"></div>
+						<div class="text px-4 pt-4">
+							<h3>落雨軒 Freya</h3>
+							<span class="position mb-2">WakuStudio合作撰稿人</span>
+							<div class="faded">
+								<p>生活不是非得要那麼枯燥乏味，一起鼓起勇氣跳開舒適圈，突破只要一點點勇氣！</p>
+								<ul class="ftco-social d-flex">
+					<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+					<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+					</ul>
+				</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> -->
+
+	<!-- <section class="ftco-section ftco-client">
+		<div class="container">
+			<div class="row justify-content-start mb-5 pb-2">
+		<div class="col-md-4 heading-section ftco-animate">
+		<span class="subheading subheading-with-line"><small class="pr-2 bg-white">Clients</small></span>
+		<h2 class="mb-4">Our CLients</h2>
+		</div>
+		<div class="col-md-8 pl-md-5 heading-section ftco-animate">
+		<div class="pl-md-4 border-line">
+			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+		</div>
+		</div>
+	</div>
+	<div class="row ftco-animate">
+		<div class="col-md-12">
+		<div class="carousel-client owl-carousel">
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 1
+			</a>
+			</div>
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 2
+			</a>
+			</div>
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 3
+			</a>
+			</div>
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 4
+			</a>
+			</div>
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 5
+			</a>
+			</div>
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 6
+			</a>
+			</div>
+			<div class="item">
+			<a href="#" class="client text-center p-5">
+				CLient Logo 7
+			</a>
+			</div>
+		</div>
+		</div>
+	</div>
+		</div>
+	</section> -->
+        
+	<!-- footer & js -->
+	<%- include('shared/footer') %>
+
+  </body>
+</html>

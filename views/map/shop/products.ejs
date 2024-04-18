@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<base href="/">
+	<%- include('../share/head') %>
+
+	<!-- CUSTOM CSS -->
+	<link href="map/css/shop.css" rel="stylesheet">
+	<link href="map/css/custom.css" rel="stylesheet">
+</head>
+ 
+<body>
+
+	<%- include('../partials/preloader') %>
+
+	<!-- Header================================================== -->
+	<%- include('../share/header-shop') %>	
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="#">Home</a>
+					</li>
+					<li><a href="#">Category</a>
+					</li>
+					<li>Page active</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="shop-section">
+
+						<!-- <div class="items-sorting">
+							<div class="row">
+								<div class="col-6">
+									<div class="results_shop">
+										Showing 1–9 of 15 results
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<select name="sort-by">
+											<option>Sorting by</option>
+											<option>Order</option>
+											<option>Price</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div> -->
+						<!--End Sort By-->
+
+						<div class="row">
+                            
+							<% products.forEach(function(product) { %>
+							<div class="shop-item col-lg-4 col-md-6 col-sm-6 col-6">
+								<div class="inner-box">
+									<div class="image-box">
+										<figure class="image">
+											<a href="/skateboard.map.spot/product/<%= product.id %>"><img src="<%= product.image %>" alt="" loading="lazy">
+											</a>
+										</figure>
+										<div class="item-options clearfix">
+											<form id="cartForm_<%= product.id %>" action="/skateboard.map.spot/cart" method="POST" style=" display: inline;">
+												<input type="hidden" name="productId" value="<%= product.id %>">
+												<a href="javascript:void(0)" class="btn_shop" onclick="submitForm('<%= product.id %>')"> 
+													<span class="icon-basket"></span>
+													<div class="tool-tip">
+														加入購物車
+													</div>
+												</a>
+											</form>
+											<!-- <a href="shop-single.html" class="btn_shop"><span class="icon-heart-8"></span>
+                                            <div class="tool-tip">
+                                                Add to Fav
+                                            </div>
+                                            </a> -->
+											<a href="/skateboard.map.spot/product/<%= product.id %>" class="btn_shop"><span class="icon-eye"></span>
+                                            <div class="tool-tip">
+                                                詳細介紹
+                                            </div>
+                                            </a>
+										</div>
+									</div>
+									<div class="product_description">
+										<div class="rating">
+											<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+										</div>
+										<h3><a href="/skateboard.map.spot/product/<%= product.id %>"><%= product.name %></a></h3>
+										<div class="price">
+											<!-- <span class="offer">NT$20.00</span> NT$<%= product.price %> -->
+										    NT$<%= product.price %>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--End Shop Item-->
+							<% }) %>
+
+						</div>
+						<!--End Shop Item-->
+
+						<nav aria-label="Page navigation">
+							<ul class="pagination justify-content-center">
+								<li class="page-item">
+									<a class="page-link" href="/skateboard.map.spot/products?page=<%= prev %>" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+									</a>
+								</li>
+								<% for (let i = 1; i <= totalPage; i++) { %>
+									<li class="page-item <%= page === i ? 'active' : '' %>">
+									  <a class="page-link" href="/skateboard.map.spot/products?page=<%= i %>"><%= i %></a>
+									</li>
+								<% } %>
+								<li class="page-item">
+									<a class="page-link" href="/skateboard.map.spot/products?page=<%= next %>" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- end pagination-->
+						
+					</div>
+					<!-- End row -->
+				</div>
+				<!-- End col -->
+
+			</div>
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+
+	<%- include('../share/footer') %>	
+	<!-- End footer -->
+	<%- include('../partials/scripts') %>
+
+	<%- include('../partials/message') %>
+
+	<script>
+		// function submitForm(productId) {
+		// 	console.log('submitForm called for product ID:', productId);
+		// 	const form = document.getElementById('cartForm_' + productId);
+		  
+		// 	new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+		// 	  form.submit();
+		// 	});
+		//   }
+
+		// function submitForm(productId) {
+		// 	fetch('/skateboard.map.spot/cart', {
+		// 		method: 'POST',
+		// 		headers: {
+		// 		'Content-Type': 'application/json'
+		// 		},
+		// 		body: JSON.stringify({ productId })
+		// 	})
+		// 	.then(response => {
+		// 		if (response.ok) {
+		// 		console.log('已加入購物車');
+		// 		} else {
+		// 		console.error('加入購物車失敗');
+		// 		}
+		// 	})
+		// 	.catch(error => {
+		// 		console.error('發生錯誤:', error);
+		// 	});
+		// }
+	</script>
+</body>
+
+</html>

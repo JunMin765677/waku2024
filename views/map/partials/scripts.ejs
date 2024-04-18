@@ -1,0 +1,215 @@
+
+<div id="toTop"></div>
+<!-- Back to top button -->
+<!-- Common scripts -->
+<script src="map/js/jquery-3.6.4.min.js"></script>
+<script src="map/js/common_scripts_min.js"></script>
+<script src="map/js/functions.js"></script>
+
+<script>
+    function confirmDelete() {
+      if (confirm('確定刪除商品?')) {
+        return true
+      }
+      return false
+    }
+    function confirmShip() {
+      if (confirm('確定出貨訂單?')) {
+        return true
+      }
+      return false
+    }
+    function confirmCancel() {
+      if (confirm('確定取消訂單?')) {
+        return true
+      }
+      return false
+    }
+    function confirmRecover() {
+      if (confirm('確定恢復訂單?')) {
+        return true
+      }
+      return false
+    }
+    function confirmRecover() {
+      if (confirm('確定恢復訂單?')) {
+        return true
+      }
+      return false
+    }
+    function confirmAuthAdmin() {
+      if (confirm('確定修改權限為admin?')) {
+        return true
+      }
+      return false
+    }
+    function confirmAuthUser() {
+      if (confirm('確定修改權限為user?')) {
+        return true
+      }
+      return false
+    }
+    
+  </script>
+
+  <script>
+  // function headerCartForm(id) {
+  //   const form = document.getElementById('headerCartForm_' + id);
+    
+  //   new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+  //     form.submit();
+  //   });
+  // }
+  function headerCartForm(id) {
+    fetch(`/skateboard.map.spot/cartItem/${id}?_method=DELETE`, {
+      method: 'POST',
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Item deleted');
+        window.location.reload(); // 刪除成功後刷新頁面
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  }
+  
+  function orderForm(id) {
+    const form = document.getElementById('orderForm_' + id);
+    
+    new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+      form.submit();
+    });
+  }
+
+  function CartForm(id) {
+    const form = document.getElementById('CartForm_' + id);
+    
+    new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+      form.submit();
+    });
+  }
+
+  function productForm(id) {
+    const form = document.getElementById('productForm_' + id);
+    
+    new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+      form.submit();
+    });
+  }
+
+  function checkoutForm(id) {
+    const form = document.getElementById('checkoutForm_' + id);
+    
+    new Promise(resolve => setTimeout(resolve, 0)).then(() => {
+      form.submit();
+    });
+  }
+
+
+  </script>
+
+<script>
+
+  // 发送 AJAX 请求获取购物车数据
+  function getCartData() {
+    fetch('/skateboard.map.spot/cartData', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const cartList = document.getElementById('updated_cart_items');
+      cartList.innerHTML = '';
+
+      // 更新购物车项目列表
+      let cartItems = '';
+      data.cartItems.forEach(item => {
+        cartItems += `
+            <li>
+            <div class="image"><img src="${item.image}" alt="image"></div>
+            <strong><a href="javascript:void(0)">${item.name}</a>${item.quantity}x NT$${item.price}</strong>
+            <a href="javascript:void(0)" class="action" onclick="headerCartForm('${item.id}')"><i class="icon-trash"></i></a>
+            </li>
+        `;
+      });
+      
+      // <form id="headerCartForm_${item.id}" action="/skateboard.map.spot/cartItem/${item.id}?_method=DELETE" method="POST">
+      //   <a href="javascript:void(0)" class="action"><i class="icon-trash" onclick="headerCartForm('${item.id}')"></i></a>
+      // </form>
+
+      cartList.innerHTML = cartItems;
+
+      // 在最後插入總價格的 <li> 元素
+      cartList.insertAdjacentHTML('beforeend', `
+        <li>
+            <% if (typeof totalPrice !== 'undefined') { %>
+                <div>Total: <span id="cart_total_price"></span></div>
+            <% } %>
+            <a href="/skateboard.map.spot/cart" class="button_drop outline">查看購物車</a>
+            <a href="/skateboard.map.spot/order/data" class="button_drop outline">直接結帳</a>
+        </li>
+      `);
+
+      // document.getElementById('updated_cart_items').innerHTML = cartItems;
+      console.log(data.cartItems)
+
+      document.getElementById('cart_length').innerHTML = data.cartItems.length; 
+      document.getElementById('cart_total_price').textContent = 'NT$' + data.totalPrice;
+
+    })
+    .catch(error => {
+      console.error('Error retrieving cart data:', error);
+    });
+  }
+
+  function submitForm(productId) {
+    fetch('/skateboard.map.spot/cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId })
+    })
+    .then(response => {
+      if (response.ok) {
+          getCartData(); // 调用 getCartData 函数
+
+          setTimeout(function() {
+          $.notify({
+            icon: '',
+            title: "<a href=\"single_tour.html\" target=\"_blank\"><h4>SpotsMap</h4>",
+            message: "<figure><img src=\"map/img/notify_img.png\"></figure><p>已加入購物車</p> "
+          }, {
+            icon_type: 'image',
+            type: 'info',
+            delay: 500,
+            timer: 3000,
+            z_index: 9999,
+            showProgressbar: false,
+            placement: {
+              from: "top",
+              align: "right"
+            },
+            animate: {
+              enter: 'animated bounceInUp',
+              exit: 'animated bounceOutDown'
+            },
+          });
+        }, 1000); 
+      } else {
+        console.error('加入購物車失敗');
+      }
+    })
+    .catch(error => {
+      console.error('發生錯誤:', error);
+    });
+  };
+
+  // 在页面加载时获取购物车数据
+  document.addEventListener('DOMContentLoaded', function() {
+    getCartData();
+  });
+
+</script>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title>意見回饋 - 滑板地圖</title>
+
+	<meta name="description" content="回饋您的想法讓滑板地圖變得更好！">
+	<meta name="keywords" content="意見回饋">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/coming">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/coming" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="意見回饋 - 滑板地圖" />
+	<meta property="og:description" content="回饋您的想法讓滑板地圖變得更好！"/>
+	
+	
+	<meta property="og:image"              content="map/img/banner-Media-2.png" />
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<%- include('share/header') %>
+	<!-- End Header -->
+
+	<main>
+	<!-- <div id="map_contact" class="contact_2"></div> -->
+	<!-- end map-->
+	<!-- <div id="directions">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<form action="http://maps.google.com/maps" method="get" target="_blank">
+						<div class="input-group">
+							<input type="text" name="saddr" placeholder="Enter your starting point" class="form-control style-2" />
+							<input type="hidden" name="daddr" value="New York, NY 11430" />
+							<span class="input-group-btn">
+								<button class="btn" type="submit" value="Get directions" style="margin-left:0;">GET DIRECTIONS</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">Home</a>
+					</li>
+					<li><a href="/skateboard.map.spot">Coming Soon</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="form_title">
+						<h3><strong><i class="icon-pencil"></i></strong>此功能尚未開放</h3>
+						<p>
+							以下留言您對滑板地圖的想法、建議或合作邀約
+						</p>
+					</div>
+					<div class="step">
+
+						<div id="message-contact"></div>
+						<form method="post" action="/skateboard.map.spot/feedback">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>如何稱呼您</label>
+										<input type="text" class="form-control"  name="nickname" placeholder="">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>聯絡方式</label>
+										<input type="text" name="email" class="form-control" placeholder="ex. email、社群帳號">
+									</div>
+								</div>
+							</div>
+							<!-- End row -->
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>留言內容</label>
+										<textarea rows="3"  name="content" class="form-control" placeholder="留言您對滑板地圖的想法、建議或合作邀約" style="height:200px;" required></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<script src='https://www.google.com/recaptcha/api.js'></script>
+								<div class="col-md-6">
+									<!-- <label>Human verification</label> -->
+									<div class="g-recaptcha col-md-6" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+									<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>        
+					
+									<input type="submit" value="送出" class="btn_1" id="">
+								</div>		
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- End col-md-8 -->
+
+				<!-- <div class="col-md-4"> -->
+					<!-- <div class="box_style_1">
+						<span class="tape"></span>
+						<h4>Address <span><i class="icon-pin pull-right"></i></span></h4>
+						<p>
+							Place Charles de Gaulle, 75008 Paris
+						</p>
+						<hr>
+						<h4>Help center <span><i class="icon-help pull-right"></i></span></h4>
+						<p>
+							Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie.
+						</p>
+						<ul id="contact-info">
+							<li>+ 61 (2) 8093 3400 / + 61 (2) 8093 3402</li>
+							<li><a href="#">info@domain.com</a>
+							</li>
+						</ul>
+					</div> -->
+					<!-- <div class="box_style_4">
+						<i class="icon_set_1_icon-57"></i>
+						<h4>Need <span>Help?</span></h4>
+						<a href="tel://004542344599" class="phone">+45 423 445 99</a>
+						<small>Monday to Friday 9.00am - 7.30pm</small>
+					</div>
+				</div> -->
+				<!-- End col-md-4 -->
+			</div>
+			<!-- End row -->
+		</div>
+		<!-- End container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Search Menu -->
+	<div class="search-overlay-menu">
+		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+		<form role="search" id="searchform" method="get">
+			<input value="" name="q" type="text" placeholder="Search..." />
+			<button type="submit"><i class="icon_set_1_icon-78"></i>
+			</button>
+		</form>
+	</div><!-- End Search Menu -->
+	
+	<!-- Sign In Popup -->
+	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Sign In</h3>
+		</div>
+		<form>
+			<div class="sign-in-wrapper">
+				<a href="#0" class="social_bt facebook">Login with Facebook</a>
+				<a href="#0" class="social_bt google">Login with Google</a>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" id="password" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_15">
+					<div class="checkboxes float-start">
+						<label class="container_check">Remember me
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+                        </label>
+					</div>
+					<div class="float-end"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+				</div>
+				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+				<div class="text-center">
+					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
+				</div>
+				<div id="forgot_pw">
+					<div class="form-group">
+						<label>Please confirm login email below</label>
+						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+						<i class="icon_mail_alt"></i>
+					</div>
+					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</div>
+			</div>
+		</form>
+		<!--form -->
+	</div>
+	<!-- /Sign In Popup -->
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- Specific scripts -->
+	<script src="map/assets/validate.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>                                   
+	<script src="map/js/map_contact.js"></script>
+	<script src="map/js/infobox.js"></script>
+	
+
+
+</body>
+
+</html>

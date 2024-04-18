@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-TW">                                 
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title>專訪專欄 | Interviews | 滑板地圖SpotsMap</title>
+
+	<meta name="description">
+	<meta name="keywords" content="滑板專欄, 選手專訪, 滑板新手, Skater">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/interviews">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/interviews" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="專訪專欄 | Interviews | 滑板地圖SpotsMap" />
+	<meta property="og:description" />
+	
+	
+	<meta property="og:image"              content="map/img/banner-Media-2.png" />
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+	<!-- CSS -->
+	<link href="map/css/blog.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<hr>
+		<hr>
+		<!-- <div id="position" style=" background-color: #dadce1;">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/interviews">專訪專欄</a></li>
+				</ul>
+			</div>
+		</div> -->
+		<!-- End position -->
+
+		<div class="container margin_60">
+            <!-- <div class="main_title">
+                <h2>Lates <span>Blog</span> News</h2>
+                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+            </div> -->
+
+            <div class="row">
+				<% Interviews.reverse().forEach(function(Interviews) { %>
+				    <!-- interview end -->
+                    <div class="col-lg-6">
+                        <a class="box_news" href="/skateboard.map.spot/interview/<%= Interviews.id %>">
+                            <figure><img src="<%= Interviews.cover %>" loading="lazy">
+                                <!-- <figcaption><strong>28</strong>Dec</figcaption> -->
+                            </figure>
+                            <ul>
+                                <li><%= Interviews.author %></li>
+                                <li><%= Interviews.date %></li>
+                            </ul>
+                            <h4><%= Interviews.title %></h4>
+                            <p style="font-size: 14px;"><%= Interviews.little %></p>
+                        </a>
+                    </div>
+                    <!-- interview end -->
+				<% }) %>
+			</div>
+			<!-- /row -->
+            <!-- <p class="btn_home_align"><a href="blog.html" class="btn_1 rounded">View all news</a></p> -->
+        </div>
+        <!-- End container -->
+
+
+		<div class="container margin_60">
+			<!-- <div class="banner_style">
+				<div class="wrapper d-flex justify-content-end align-items-end opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.08)" style="background-color: rgba(0, 0, 0, 0);">
+					<div>
+						<h3><br><br></h3>
+						<p></p>
+						<a href="/skateboard.map.spot/addEvent" class="btn_1" style="background: #dd8c4a;">活動登錄</a>
+					</div>
+				</div>
+			</div> -->
+			<!-- /banner_2 -->
+
+			<div class="row">
+
+				<!-- <aside class="col-lg-3">
+
+					<div class="widget">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+						<button class="btn btn-default" type="button" style="margin-left:0;"><i class="icon-search"></i></button>
+						</span>
+						</div>
+					</div>
+					<hr>
+					<div class="widget" id="cat_blog">
+						<h4>Categories</h4>
+						<ul>
+							<li><a href="#">Places to visit</a>
+							</li>
+							<li><a href="#">Top tours</a>
+							</li>
+							<li><a href="#">Tips for travellers</a>
+							</li>
+							<li><a href="#">Events</a>
+							</li>
+						</ul>
+					</div>
+
+					<hr>
+
+					<div class="widget">
+						<h4>Recent post</h4>
+						<ul class="recent_post">
+							<li>
+								<i class="icon-calendar-empty"></i> 16th July, 2020
+								<div><a href="#">It is a long established fact that a reader will be distracted </a>
+								</div>
+							</li>
+							<li>
+								<i class="icon-calendar-empty"></i> 16th July, 2020
+								<div><a href="#">It is a long established fact that a reader will be distracted </a>
+								</div>
+							</li>
+							<li>
+								<i class="icon-calendar-empty"></i> 16th July, 2020
+								<div><a href="#">It is a long established fact that a reader will be distracted </a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<hr>
+					<div class="widget tags">
+						<h4>Tags</h4>
+						<a href="#">Lorem ipsum</a>
+						<a href="#">Dolor</a>
+						<a href="#">Long established</a>
+						<a href="#">Sit amet</a>
+						<a href="#">Latin words</a>
+						<a href="#">Excepteur sint</a>
+					</div>
+
+				</aside> -->
+
+			</div>
+			<!-- End row-->
+		</div>
+		<!-- End container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Search Menu -->
+	<div class="search-overlay-menu">
+		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+		<form role="search" id="searchform" method="get">
+			<input value="" name="q" type="text" placeholder="Search..." />
+			<button type="submit"><i class="icon_set_1_icon-78"></i>
+			</button>
+		</form>
+	</div><!-- End Search Menu -->
+	
+	<!-- Sign In Popup -->
+	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Sign In</h3>
+		</div>
+		<form>
+			<div class="sign-in-wrapper">
+				<a href="#0" class="social_bt facebook">Login with Facebook</a>
+				<a href="#0" class="social_bt google">Login with Google</a>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" id="password" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_15">
+					<div class="checkboxes float-start">
+						<label class="container_check">Remember me
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+                        </label>
+					</div>
+					<div class="float-end"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+				</div>
+				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+				<div class="text-center">
+					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
+				</div>
+				<div id="forgot_pw">
+					<div class="form-group">
+						<label>Please confirm login email below</label>
+						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+						<i class="icon_mail_alt"></i>
+					</div>
+					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</div>
+			</div>
+		</form>
+		<!--form -->
+	</div>
+	<!-- /Sign In Popup -->
+	
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<div id="spotsData" data-spots="<%= JSON.stringify(Interviews) %>"></div>
+	<script>
+		var spots = document.getElementById('spotsData').getAttribute('data-spots');
+		var AllSpots = JSON.parse(spots);
+
+		var locations = AllSpots.map(function(spot) {
+		return spot.title;
+		}).join(', ');
+
+		var descriptionMeta = document.querySelector('meta[name="description"]');
+		if (descriptionMeta) {
+		descriptionMeta.setAttribute('content', locations);
+		}
+
+		var ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+		if (ogDescriptionMeta) {
+		ogDescriptionMeta.setAttribute('content', locations);
+		}
+
+	</script>
+
+	<!-- Masonry filter -->
+	<script src="map/js/isotope.min.js"></script>
+	<script>
+	$(window).on('load',function(){
+		var $container = $('.isotope-wrapper'),
+			filters = {};
+
+		$container.isotope({
+		itemSelector : '.isotope-item'
+		});
+	});
+	</script>
+
+</body>
+
+</html>

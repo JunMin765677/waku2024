@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-TW">                                 
+
+<head>
+	<base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Favicons-->
+	<link rel="shortcut icon" href="map/logo/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="map/logo/favicon.ico" type="image/x-icon">
+	
+	<link rel="apple-touch-icon" sizes="57x57" href="map/logo/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="map/logo/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="map/logo/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="map/logo/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="map/logo/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="map/logo/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="map/logo/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="map/logo/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="map/logo/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="map/logo/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="map/logo/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="map/logo/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="map/logo/favicon-16x16.png">
+	<link rel="manifest" href="map/logo/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="map/logo/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	
+	<!-- GOOGLE WEB FONT -->
+	<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/earlyaccess/notosanstc.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
+	
+	<!-- COMMON CSS -->
+	<link href="map/css/bootstrap.min.css" rel="stylesheet">
+	<link href="map/css/style.css" rel="stylesheet">
+	<link href="map/css/vendors.css" rel="stylesheet">
+	
+	<!-- CUSTOM CSS -->
+	<link href="map/css/custom.css" rel="stylesheet">
+	
+	<!-- Google tag (gtag.js) -->
+	<meta name="google-site-verification" content="3TeJVCuHkJLTfBwx07kEVFuD9JmS6kN5-CZ1jqNxweI" />	
+	
+	<style>
+		body {
+			font-family: 'Noto Sans TC',sans-serif !important;
+		  }
+	</style>
+	
+	<title>Manage</title>
+
+	<!-- CSS -->
+	<link href="map/css/blog.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header id="plain">    
+		<div class="container">
+			<div class="row">
+				<div class="col-3">
+					<div id="logo_home">
+						<h3><a href="/skateboard.map.spot" title="滑板地圖"></a></h3>
+					</div>
+				</div>
+				<nav class="col-9">
+					<a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
+					<div class="main-menu">
+						<div id="header_menu">
+						</div>
+						<a class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
+						<ul>
+							<li class="submenu">
+								<a href="/skateboard.map.spot" class="show-submenu">首頁 Home</a>
+							</li>
+							<!-- <li class="submenu">
+								<a href="javascript:void(0);" class="show-submenu">板點情報 Spots<i class="icon-down-open-mini"></i></a>
+								<ul>
+									<li><a href="/skateboard.map.spot/citySpot">板點一覽 AllSpots</a></li>
+									<li><a href="index_22.html" data-bs-toggle="modal" data-bs-target="#myReview">板點回報 FeedBack</a></li>
+								</ul>
+							</li> -->
+							<li class="submenu">
+								<a href="/skateboard.map.spot/addInterview" class="show-submenu">新增文章 New Post</a>
+							</li>
+						</ul>
+					</div><!-- End main-menu -->
+					<!-- <ul id="top_tools">
+						<li>
+							<a href="javascript:void(0);" class="search-overlay-menu-btn"><i class="icon_search"></i></a>
+						</li>
+					</ul> -->
+				</nav>
+			</div>
+		</div><!-- container -->
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/events">找活動</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- End position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-lg-9" id="faq">
+					<h3 style="color: #9c8c7f;">文章管理List</h3><br>
+					<div id="tips" class="accordion_styled">
+				    	<% Interviews.reverse().forEach(function(Interviews) { %>
+							<div class="card">
+								<div class="card-header">
+								<h4>
+									<a href="/skateboard.map.spot/interview/<%= Interviews.id %>"><%= Interviews.date %> - 預覽</a>
+									<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#tips" href="#collapse<%= Interviews.id %>_tips"><%= Interviews.title %><i class="indicator icon-plus float-end"></i></a>
+								</h4>
+								</div>
+								<div id="collapse<%= Interviews.id %>_tips" class="collapse" data-bs-parent="#tips">
+								<div class="card-body">
+									<p><a href="/skateboard.map.spot/editInterview/<%= Interviews.id %>" class="btn_1" style="background-color: #f1c1a1; color: #ffffff;">編輯內容</a></p>
+									<p>							
+										<form method="post" action="/skateboard.map.spot/uploadInterview" enctype="multipart/form-data">
+											<input name="pieceId" type="hidden" value="<%= Interviews.id %>">
+											<input name="tag" type="hidden" value="cover">
+											<input type="file" name="file" id="js-upload-files" style="background-color: #abb2b9; color: #ffffff;" multiple>
+											<button type="submit" class="btn_1 green" style="background-color: #75889e; color: #ffffff;">封面上傳</button>
+									    </form>
+		                            </p>
+								</div>
+								</div>
+							</div>
+						<% }) %>
+					</div>
+					<!--End tips -->
+				</div>
+		    </div>
+
+		</div>
+		<!-- End container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->	
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- cover  -->
+	<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">封面cover</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/uploadInterview" enctype="multipart/form-data">
+						<input name="interviewId" type="hidden" value="<%= Interviews.id %>">
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>圖片應小於10MB</b></label><br>
+								<label><i class="fa icon-ok"></i><b>一次限制上傳一張</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<button type="submit" class="btn_1 green" id="js-upload-submit" style="background-color: #75889e; color: #ffffff;">上傳照片</button>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+
+	<!-- cover  -->
+	<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">封面cover</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/uploadInterview" enctype="multipart/form-data">
+						<input name="interviewId" type="hidden" value="<%= Interviews.id %>">
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>圖片應小於10MB</b></label><br>
+								<label><i class="fa icon-ok"></i><b>一次限制上傳一張</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<button type="submit" class="btn_1 green" id="js-upload-submit" style="background-color: #75889e; color: #ffffff;">上傳照片</button>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+	
+	
+
+</body>
+
+</html>

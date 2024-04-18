@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title><%= Map[0].city %>滑板點情報 | 全台板點大整理-滑板地圖SpotsMap</title>
+
+	<meta name="description">
+	<meta name="keywords" content="開到幾點, 地板好嗎, 滑板場地, Skate Park">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/citySpot">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/citySpot" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="<%= Map[0].city %>滑板點情報特蒐 | 全台板點一次看-滑板地圖SpotsMap" />
+	<meta property="og:description" />
+	
+	
+	<meta property="og:image"              content="map/img/banner-Media-2.png" />
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+
+	<style>
+		#map_canvas {
+			height: 300px;
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 10px;
+		}
+		#current {
+			padding-top: 25px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- <div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div> -->
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<%- include('share/header') %>
+	<!-- End Header -->
+
+	<!-- 含 postion map  -->
+	<main>
+		<div id="position">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">HomePage</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Position -->
+
+		<div class="container margin_60">
+			<div class="banner_citySpot" id="banner_citySpot">
+				<div class="wrapper d-flex justify-content-end align-items-end opacity-mask" >
+					<div>
+						<!-- <h3>Share <br>Your Spot</h3>
+						<p></p> -->
+						<!-- <a href="/skateboard.map.spot" class="btn_1 " style="background: #dd8c4a;" data-bs-toggle="modal" data-bs-target="#myReview">板點通報</a> -->
+					</div>
+				</div>
+				<!-- /wrapper -->
+			</div>
+			<!-- /banner -->
+
+			<div class="row">
+				<aside class="col-lg-3">
+					<!-- VIEW ON MAP BUTTON -->
+					<!-- <p>
+						<a class="btn_map" data-bs-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
+					</p> -->
+                    
+					<!-- 分類器 -->
+					<div class="box_style_cat">
+						<ul id="cat_nav">
+							<li><a href="/skateboard.map.spot/citySpot" id="active"><i class="icon_set_1_icon-51"></i>找板點 <span>All</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=臺北"><i class="icon-location-2"></i>臺北 <span>Taipei</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=新北"><i class="icon-location-2"></i>新北 <span>New Taipei</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=桃園"><i class="icon-location-2"></i>桃園 <span>Taoyuan</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=臺中"><i class="icon-location-2"></i>臺中 <span>Taichung</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot"><i class="icon-location-2"></i>臺南 <span>Tainan</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=高雄"><i class="icon-location-2"></i>高雄 <span>Kaohsiung</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=基隆"><i class="icon-location-2"></i>基隆 <span>Keelung City</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=新竹"><i class="icon-location-2"></i>新竹 <span>Hsinchu</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=嘉義"><i class="icon-location-2"></i>嘉義 <span>Chiayi</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=苗栗"><i class="icon-location-2"></i>苗栗 <span>Miaoli</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=彰化"><i class="icon-location-2"></i>彰化 <span>Changhua</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=南投"><i class="icon-location-2"></i>南投 <span>Nantou</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=雲林"><i class="icon-location-2"></i>雲林 <span>Yunlin</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=屏東"><i class="icon-location-2"></i>屏東 <span>Pingtung</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=宜蘭"><i class="icon-location-2"></i>宜蘭 <span>Yilan</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=花蓮"><i class="icon-location-2"></i>花蓮 <span>Hualien</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=臺東"><i class="icon-location-2"></i>臺東 <span>Taitung</span></a>
+							</li>
+							<li><a href="/skateboard.map.spot/citySpot?city=澎湖"><i class="icon-location-2"></i>澎湖 <span>Penghu</span></a>
+							</li>
+						</ul>
+					</div>
+					
+				</aside>
+				<!--End MAP 分類器 篩選器 -->
+
+				<div class="col-lg-9">
+					<div class="isotope-wrapper">
+						<div class="row">
+							<!-- LOCATION 列表開始 -->
+							<% Map.reverse().forEach(function(Map) { %>
+							<div class="col-md-4 col-sm-4 col-6 wow zoomIn isotope-item" data-wow-delay="0.1s">
+								<div class="tour_container ">
+									<div class="img_container">
+										<a href="/skateboard.map.spot/spot/<%= Map.id %>">
+											<% if (Map.spotPictures.length > 0) { %>
+											<img src="<%= Map.spotPictures[0].picture %>" width="800" height="533" class="img-fluid" alt="Image" loading="lazy">
+											<% } else { %>
+											<img src="map/img/spotDefult.png" width="800" height="533" class="img-fluid" alt="Image" loading="lazy">
+											<% } %>
+											<div class="short_info">
+												<i class="icon-location-2"></i><%= Map.city %><span class="price"><sup></sup></span>
+											</div>
+										</a>
+									</div>
+									<div class="tour_title">
+										<h3><strong><%= Map.location %></strong><a href="<%= Map.googleMap %>"><i class="icon-location"></i></a></h3>
+										<div class="rating">
+											<i class="icon-star-filled voted"></i><i class="icon-star-filled voted"></i><i class="icon-star-filled voted"></i><i class="icon-star-filled voted"></i><i class="icon-star-filled voted"></i><small>&nbsp;&nbsp;&nbsp;&nbsp;share by <a href="<%= Map.op1 %>" target="_blank"><%= Map.sharer %></a></small>
+										</div>
+									</div>
+								</div>
+							</div>
+							<% }) %>
+							<!-- End col-md-6 -->
+						</div>
+					<!-- End row -->
+					</div>
+
+					<!-- 換頁 -->
+					<!-- <nav aria-label="Page navigation">
+						<ul class="pagination justify-content-center">
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+							<li class="page-item active"><span class="page-link">1</span>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+						</ul>
+					</nav> -->
+					<!-- end pagination-->
+
+				</div>
+				<!-- End col lg 9 -->
+			</div>
+			<!-- End row -->
+		</div>
+		<!-- End container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->	
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- Map -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyA3mojVekW0Gc6loBjM0FQfsz8vt-dd3jw"></script>
+	<script type="text/javascript" src="map/js/map_home.js"></script>
+	<script type="text/javascript" src="map/js/infobox.js"></script>
+
+	<!-- SEO description -->
+	<div id="spotsData" data-spots="<%= JSON.stringify(Map) %>"></div>
+	<script>
+		var spots = document.getElementById('spotsData').getAttribute('data-spots');
+		var AllSpots = JSON.parse(spots);
+
+		var locations = AllSpots.map(function(spot) {
+			return spot.city + ' - ' + spot.location + ' - ' + spot.opentime + ' - ' + spot.description + ' - ' + spot.sharer+ ' - ' + spot.shop;
+			}).join(', ');
+	
+		var descriptionMeta = document.querySelector('meta[name="description"]');
+		if (descriptionMeta) {
+		descriptionMeta.setAttribute('content', locations);
+		}
+
+		var ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+		if (ogDescriptionMeta) {
+		ogDescriptionMeta.setAttribute('content', locations);
+		}
+
+	</script>
+	<!-- END SEO description -->
+
+
+	<!-- Specific scripts -->
+	<!-- Cat nav mobile -->
+	<script src="map/js/cat_nav_mobile.js"></script>
+	<script>
+		$('#cat_nav').mobileMenu();
+	</script>
+
+	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<script>
+		function onSubmit(token) {
+		  document.getElementById("newspot").submit();
+		}
+	</script>
+
+	<!-- addSpot Popup -->
+	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">板點回報 Share Spot</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form method="post" action="/skateboard.map.spot/handleAddLocation">
+						<!-- <input name="hotel_name" id="hotel_name" type="hidden" value="Mariott Hotel Paris"> -->
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<select class="form-select" name="city" id="room_type_review" required>
+										<option value="">選擇縣市 (必填)*</option>
+										<option value="臺北">臺北</option>
+										<option value="新北">新北</option>
+										<option value="桃園">桃園</option>
+										<option value="臺中">臺中</option>
+										<option value="臺南">臺南</option>
+										<option value="高雄">高雄</option>
+										<option value="基隆">基隆</option>
+										<option value="新竹">新竹</option>
+										<option value="嘉義">嘉義</option>
+										<option value="苗栗">苗栗</option>
+										<option value="彰化">彰化</option>
+										<option value="南投">南投</option>
+										<option value="雲林">雲林</option>
+										<option value="屏東">屏東</option>
+										<option value="宜蘭">宜蘭</option>
+										<option value="花蓮">花蓮</option>
+										<option value="臺東">臺東</option>
+										<option value="澎湖">澎湖</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input name="location" type="text" placeholder="板點名稱 (必填)*" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>簡單敘述這個地點</label>
+								<textarea name="description" id="review_text" class="form-control" style="height:100px" wrap="hard" cols="50" rows="5" placeholder="讓其他人更瞭解這裡的現況！ ex.廁所在哪裡、有地形嗎、安全嗎、有無遮蔭、建議等等"></textarea>
+							</div>
+							<div class="col-12">
+								<label><b>地點定位，將標記移到定位點(衛星檢視可協助更精準定位)。</b></label>
+								<div id="map_canvas" class="map"></div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12" id="faq">
+								<div id="payment" class="accordion_styled">
+									<!-- 新增更多詳細資料 -->
+									<div class="card">
+										<div class="card-header">
+											<h4>
+												<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#payment" href="#collapseOne_payment">新增更多詳細資料 (非必填)<i class="indicator icon-minus float-end"></i></a>
+											</h4>
+										</div>
+										<div id="collapseOne_payment" class="collapse" data-bs-parent="#payment">
+											<div class="card-body">
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="floor" id="review" type="text" placeholder="這裡的地板材質" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="opentime" id="lastname_review" type="text" placeholder="開放時間，ex.晚上有開燈嗎?" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="shop" id="lastname_review" type="text" placeholder="附近好吃好玩 ex.附近推薦美食、推薦行程?" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="googleMap" type="text" placeholder="Google Map 定位連結，協助導航點" class="form-control">
+													</div>
+													<div id="current">
+													</div>				
+												</div>										
+												<div class="col-md-9">
+													<div class="form-group">
+														<label>ex.滑板地圖</label>
+														<input name="sharer" id="lastname_review" type="text" placeholder="首位板點回報人（歡迎所有滑板人板店教練選手）" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<label>IG連結：https://www.instagram.com/ID</label>
+														<input name="op1" id="lastname_review" type="text" placeholder="讓板友們認識你! Instagram/fb/twitter/web連結" class="form-control">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 新增更多詳細資料END -->
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+							<div class="col-md-12">
+				
+								<input class="g-recaptcha btn_1 green" 
+								data-sitekey="6Ley7gEnAAAAALUZpenLA7p4cSXa-Ha-mM1U1Ygy" 
+								data-callback='onSubmit' 
+								data-action='submit' type="submit" value="提交">
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End addSpot Popup -->
+
+	<!-- banner popup js -->
+	<script>
+		// 監聽點擊事件
+		document.getElementById("banner_citySpot").addEventListener("click", function() {
+			// 觸發彈出窗口
+			var myReviewModal = new bootstrap.Modal(document.getElementById('myReview'));
+			myReviewModal.show();
+		});
+	</script>
+	<!-- banner popup js -->
+	
+
+	<!-- GET lat/lng -->
+	<script>
+		var map = new google.maps.Map(document.getElementById('map_canvas'), {
+			zoom: 10,
+			center: new google.maps.LatLng(24.105771, 120.807460),
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: true
+		});
+		
+		var myMarker = new google.maps.Marker({
+			position: new google.maps.LatLng(24.105771, 120.807460),
+			draggable: true
+		});
+
+		google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+			document.getElementById('current').innerHTML = '<input name="lat" placeholder="經度" type="hidden" class="form-control" value=" ' + evt.latLng.lat().toFixed(6) + '"> <input name="lon" placeholder="緯度" type="hidden" class="form-control" value=" ' + evt.latLng.lng().toFixed(6) + '">';
+		});
+		
+		google.maps.event.addListener(myMarker, 'dragstart', function (evt) {
+			document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+		});
+		
+		map.setCenter(myMarker.position);
+		myMarker.setMap(map);
+
+	</script>
+	<!-- GET lat/lng END -->	
+
+	<!-- Masonry filter -->
+	<script src="map/js/isotope.min.js"></script>
+	<script>
+	$(window).on('load',function(){
+		var $container = $('.isotope-wrapper'),
+			filters = {};
+
+		$container.isotope({
+		itemSelector : '.isotope-item'
+		});
+	});
+	</script>
+	
+	<!-- 定位 -->
+	<script>
+		let infoWindow;
+
+		function addLocationButton(map) {
+		const locationButton = document.createElement("button");
+
+		locationButton.textContent = "移動到你現在的位置！";
+		locationButton.classList.add("custom-map-control-button");
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationButton);
+		locationButton.addEventListener("click", () => {
+			if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+				const pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				};
+
+				if (!infoWindow) {
+					infoWindow = new google.maps.InfoWindow();
+				}
+
+				infoWindow.setPosition(pos);
+				infoWindow.setContent("Boom！在這裡！");
+				infoWindow.open(map);
+				map.setCenter(pos);
+				},
+				() => {
+				handleLocationError(true, infoWindow, map.getCenter());
+				}
+			);
+			} else {
+			// Browser doesn't support Geolocation
+			handleLocationError(false, infoWindow, map.getCenter());
+			}
+		});
+		}
+
+		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		infoWindow.setPosition(pos);
+		infoWindow.setContent(
+			browserHasGeolocation
+			? "Error: The Geolocation service failed."
+			: "Error: Your browser doesn't support geolocation."
+		);
+		infoWindow.open(map);
+		}
+
+		addLocationButton(map);
+
+	</script>
+	
+	
+	
+
+</body>
+
+</html>

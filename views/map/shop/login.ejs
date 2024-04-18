@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<base href="/">
+	<%- include('../share/head') %>
+</head>
+<body> 
+
+	<%- include('../partials/preloader') %>
+	<!-- Header================================================== -->
+	<%- include('../share/header') %>	
+	<!-- End Header -->
+	<link href="map/css/custom.css" rel="stylesheet">
+    
+	<main>
+        <section id="hero" class="login">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+                        <div id="login">
+                                <div class="text-center">
+                                    <!-- <% if (front) { %>
+                                        <h5>FrontStage</h5>
+                                    <% }else{ %>
+                                        <h5>BackStage</h5>
+                                    <% } %> -->
+                                    <img src="map/img/spots-bg.png" alt="Image" width="160" height="34">
+                                </div>
+                                <hr>
+                                <% if (front) { %>
+                                <form action="/skateboard.map.spot/users/login" method="POST">
+                                <% } else { %>
+                                <form action="/skateboard.map.spot/admin/login" method="POST">
+                                <% } %>
+                                    <!-- <a href="#0" class="social_bt facebook">Login with Facebook</a> -->
+                                    <% if (front) { %>
+                                        <a href="/skateboard.map.spot/users/google" class="social_bt google">使用 Google 登入</a>
+                                    <% } %>
+                                    <div class="divider"><span>Or</span></div>
+                                        <div class="form-group">
+                                            <label>電子信箱</label>
+                                            <input type="email" name="email" id="email" class=" form-control " value="<%= email %>" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>密碼</label>
+                                            <input type="password" name="password" id="password" class=" form-control" required>
+                                        </div>
+                                        <p class="small">
+                                            <a href="#">Forgot Password?</a>
+                                        </p>
+                                        <button type="submit" class="btn_full">登入</button>
+                                        <!-- <a href="/skateboard.map.spot/users/google" class="btn_full_outline">Google Login</a> -->
+                                </form>
+                                        <% if (front) { %>
+                                            <p class="small">
+                                                尚未註冊?<a href="/skateboard.map.spot/users/register">前往註冊</a>
+                                            </p>
+                                            <!-- <p class="small">
+                                                <a href="/skateboard.map.spot/admin/login">管理員登入</a>
+                                            </p>         -->
+                                        <% } else { %>
+                                            <p class="small">
+                                                <a href="/skateboard.map.spot/users/login">使用者登入</a>
+                                            </p>       
+                                        <% } %>
+
+                                        <!-- <a href="register.html " class="btn_full_outline">Register</a> -->
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</main><!-- End main -->
+	
+	<%- include('../share/footer') %>	
+	<!-- End footer -->
+	<%- include('../partials/scripts') %>
+    
+    <%- include('../partials/message') %>
+	
+
+
+  </body>
+</html>

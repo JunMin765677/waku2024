@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title><%= spot.city %>滑板點情報 | <%= spot.location %>-滑板地圖SpotsMap</title>
+
+	<meta name="description" content="<%= spot.description %>">
+	<meta name="keywords" content="板點情報, 滑板新手, 滑板場, Skate Park">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot" />
+	<meta property="og:type"               content="place" />
+	<meta property="og:title"              content="<%= spot.city %>滑板點情報 | <%= spot.location %>-滑板地圖SpotsMap" />
+	<meta property="og:description" content="<%= spot.description %>" />
+	
+	
+	<% if (spotPicture.length === 0) { %>
+		<meta property="og:image"              content="map/img/spotDefult.png" />
+	<% } else { %>
+		<meta property="og:image"              content="<%= spotPicture[0].picture %>" />
+	<% } %>
+	<meta property="og:image:width"        content="600" />
+	<meta property="og:image:height"       content="600" />
+
+	<!-- SPECIFIC CSS -->
+	<link href="map/css/shop.css" rel="stylesheet">
+
+	<style>
+		#map_canvas {
+			height: 300px;
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 10px;
+		}
+		#map_canvas_top {
+			height: 300px;
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			border-radius: 10px;
+		}
+		#current {
+			padding-top: 25px;
+		}
+
+		.spotTitle{
+			color: rgb(103, 97, 87);
+		}
+		
+		.descriptionForSpot {
+			white-space: pre-wrap;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<hr>
+		<hr>
+		<div id="position" style=" background-color: #dadce1;">
+			<div class="container">
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/citySpot">找板點</a>
+					</li>
+					<li><a href="/skateboard.map.spot/spot/<%= spot.id %>"><%= spot.location %></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Position -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-lg-8" id="single_tour_desc">
+					<!-- Map button for tablets/mobiles -->
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row">
+								<h1 class="spotTitle"><%= spot.location %>&nbsp;&nbsp;<a href="/skateboard.map.spot/citySpot?city=<%= spot.city %>" class="btn_1 outline"><%= spot.city %></a></h1>
+							</div>
+							<span class="rating"><i class="icon-lifebuoy-1"></i><i class="icon-lifebuoy-1"></i><i class="icon-lifebuoy-1"></i><i class="icon-lifebuoy-1"></i><i class="icon-lifebuoy-1"></i>
+							<hr>
+						</div>
+					</div>
+					<div class="row">
+						<div id="map_canvas_top" class="map"></div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="product-info-tabs">
+							<div class="prod-tabs" id="product-tabs">
+								<!-- choose -->
+								<div class="tab-btns clearfix">
+									<a href="#prod-Photos" class="tab-btn active-btn">情報</a>
+									<a href="#prod-Setup" class="tab-btn">回饋</a>
+									<a href="#prod-Picture" class="tab-btn">照片</a>
+								</div>
+
+                                <!-- content -->
+								<div class="tabs-container">
+
+                                    <!-- Tab1 -->
+									<div class="tab active-tab" id="prod-Photos">
+										<div class="row  add_bottom_60 ">
+											<h4>詳細資訊</h4>
+											<p>
+											</p>
+											<div class="row">
+												<div class="col-md-12">
+													<ul class="list_ok">
+														<li>From <a href="<%= spot.op1 %>" target="_blank"><%= spot.sharer %></a></li>
+														<li>地板材質：<b><%= spot.floor %></b></li>
+														<li>開放時間：<b><%= spot.opentime %></b></li>
+														<li>附近好吃好玩：<b><%= spot.shop %></b></li>
+													</ul>
+												</div>
+											</div>
+				
+											<h4>地點簡述</h4>
+											<p class="descriptionForSpot"><%- spot.description %></p>											<!-- End row  -->	
+										</div>
+										<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#detail" style="background-color: #ed8037; color: #ffffff;">資訊更新</a>
+							
+									</div>
+									<!--End Tab1-->
+
+                                    <!-- Tab2 -->
+									<div class="tab" id="prod-Setup">
+										<h5>最新回饋-共<%= reviews.length %>則</h5>
+										<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#myReview" style="background-color: #75889e; color: #ffffff;">撰寫回饋</a>
+										<% reviews.forEach(function(reviews) { %>	
+											<div class="review_strip_single">
+												<img src="map/img/skateboard.png" alt="Image" class="rounded-circle">
+												<small> - <%= reviews.updatedAt.toLocaleString('en-US', { 
+													timeZone: 'Asia/Taipei',
+													year: 'numeric', 
+													month: 'short', 
+													day: '2-digit'
+												  }) %> -</small>
+												<h4><%= reviews.username %></h4>
+												<h4>
+													"<%= reviews.content %>"
+												</h4>
+												<div class="rating">
+													<% for (let i = 1; i <= 4; i++) { %>
+													  <% if (i <= reviews.score) { %>
+														<i class="icon-heart-filled"></i>
+													  <% } else { %>
+														<i class="icon-heart-2"></i>
+													  <% } %>
+													<% } %>
+												</div>								  
+											</div>
+											<% }) %>
+											<!-- End review strip -->				
+									</div>
+									<!--End Tab2-->
+
+									<!-- Tab3 -->
+									<div class="tab" id="prod-Picture">
+										<a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#upload" style="background-color: #75889e; color: #ffffff;">上傳地點照片</a>
+										<div class="row magnific-gallery add_bottom_60">
+											<% if (spotPicture.length === 0) { %>
+											<% }else{ %>
+												<% for (var i = 0; i < spotPicture.length; i++) { %>
+													<div class=" col-6 col-sm-6">
+														<div class="img_wrapper_gallery">
+															<div class="img_container_gallery">
+																<a href="<%= spotPicture[i].picture %>" title="Photo title" data-effect="mfp-zoom-in"><img src="<%= spotPicture[i].picture %>" alt="Image" class="img-fluid">
+																	<i class="icon-resize-full-2"></i>
+																</a>
+															</div>
+														</div>
+													</div>
+												<% } %>
+											<% } %>
+										</div>	
+									</div>
+									<!--End Tab3-->
+								</div>
+								<!--End tabs-container-->
+							</div>
+						</div>
+					</div>
+					<p class="d-block d-lg-none"><a class="btn_full_outline" href="<%= spot.googleMap %>">在Google Map<i class="icon-location"></i>上查看</a></p>
+
+				</div>
+				<!--End  single_tour_desc-->
+
+				<aside class="col-lg-4" id="sidebar">
+					<p class="d-none d-xl-block d-lg-block">
+						<a class="btn_full_outline" href="<%= spot.googleMap %>">在Google Map<i class="icon-location"></i>上查看</a>
+					</p>
+					<div class="theiaStickySidebar">
+						<div class="box_style_1 expose">
+							<h3 class="inner">Thanks GoogleAds</h3>
+							<div class="row">
+								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6684087118034118"
+									crossorigin="anonymous"></script>
+								<!-- Spot -->
+								<ins class="adsbygoogle"
+									style="display:block"
+									data-ad-client="ca-pub-6684087118034118"
+									data-ad-slot="5243726110"
+									data-ad-format="auto"
+									data-full-width-responsive="true"></ins>
+								<script>
+									(adsbygoogle = window.adsbygoogle || []).push({});
+								</script>
+								<!-- <img alt="Image" class="sp-image" src="map/img/TEST-aside.png" > -->
+							</div>
+						</div>
+					</div>
+				</aside>
+			</div>
+			<!--End row -->
+		</div>
+		<!--End container -->
+        
+        <div id="overlay"></div>
+		<!-- Mask on input focus -->
+    
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footerSingle') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Review -->
+	<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">撰寫回饋 Feedback</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/handleAddReview">
+						<input name="MapId" id="tour_name" type="hidden" value="<%= spot.id %>">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input name="username" id="name_review" type="text" placeholder="顯示的名稱" class="form-control" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<select class="form-select" name="score" id="quality_review" required>
+										<option value="">請給分-滿分四顆</option>
+										<option value="1">1顆輪子</option>
+										<option value="2">2顆輪子</option>
+										<option value="3">3顆輪子</option>
+										<option value="4">4顆輪子</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="form-group">
+							<textarea name="content" id="review_text" class="form-control" style="height:100px" placeholder="您對這個場地的想法、建議、現況更新或任何想分享的事"></textarea>
+						</div>
+						<div class="row">
+							<script src='https://www.google.com/recaptcha/api.js'></script>
+							<div class="col-md-6">
+								<!-- <label>Human verification</label> -->
+								<div class="g-recaptcha col-md-6" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+								<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>        
+				
+								<input type="submit" value="Submit" class="btn_1 green" id="">
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End modal review -->
+
+	<!-- Picture -->
+	<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">上傳這個地點的照片</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/upload" enctype="multipart/form-data">
+						<input name="MapId" id="tour_name" type="hidden" value="<%= spot.id %>" require>
+						<div class="row">
+							<div class="form-inline upload_1">
+								<label><i class="fa icon-ok"></i><b>建議上傳圖片應小於5MB。</b></label><br>
+								<label><i class="fa icon-ok"></i><b>一次限制上傳一張哦。</b></label>
+								<div class="form-group">
+									<input type="file" name="file" id="js-upload-files" multiple>
+								</div>
+								<script src='https://www.google.com/recaptcha/api.js'></script>
+								<div class="col-md-6">
+									<!-- <label>Human verification</label> -->
+									<div class="g-recaptcha col-md-6" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+									<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>        
+									</div>		
+								<button type="submit" class="btn_1 green" id="js-upload-submit">上傳照片</button>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End picture -->
+	
+	<script src="https://maps.googleapis.com/maps/api/js?v=quarterly&key=AIzaSyA3mojVekW0Gc6loBjM0FQfsz8vt-dd3jw"></script>
+	<div id="spotData" data-spot="<%= JSON.stringify(spot) %>"></div>
+
+	<!-- Top map -->
+	<script>
+		var spot = document.getElementById('spotData').getAttribute('data-spot');
+		var Spot = JSON.parse(spot);
+
+		var map = new google.maps.Map(document.getElementById('map_canvas_top'), {
+			zoom: 16,
+			center: new google.maps.LatLng(Spot.lat, Spot.lon),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+		
+		var myMarker = new google.maps.Marker({
+			position: new google.maps.LatLng(Spot.lat, Spot.lon),
+			draggable: false
+		});
+
+		map.setCenter(myMarker.position);
+		myMarker.setMap(map);
+
+	</script>
+	<!--  Top map END -->	
+
+	
+	<!-- basic-details Popup -->
+	<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">資訊更新 Basic Details Update</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/updateSpot">
+						<input name="id" id="tour_name" type="hidden" value="<%= spot.id %>">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input name="location" type="text" placeholder="板點名稱 (必填)*" value="<%= spot.location %>" class="form-control" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>簡單敘述這個地點</label>
+								<textarea name="description" id="review_text" class="form-control" style="height:100px" wrap="hard" cols="50" rows="5" placeholder="讓其他人更瞭解這裡的現況！ ex.廁所在哪裡、有地形嗎、安全嗎、有無遮蔭、建議等等"><%= spot.description %></textarea>
+							</div>
+							<div class="col-12">
+								<label><b>地點定位，將標記移到定位點(衛星檢視可協助更精準定位)。</b></label>
+								<div id="map_canvas" class="map"></div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12" id="faq">
+								<div id="payment" class="accordion_styled">
+									<!-- 新增更多詳細資料 -->
+									<div class="card">
+										<div class="card-header">
+											<h4>
+												<a class="accordion-toggle" data-bs-toggle="collapse" data-bs-parent="#payment" href="#collapseOne_payment">新增更多詳細資料 (非必填)<i class="indicator icon-minus float-end"></i></a>
+											</h4>
+										</div>
+										<div id="collapseOne_payment" class="collapse" data-bs-parent="#payment">
+											<div class="card-body">
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="floor" id="review" type="text" placeholder="這裡的地板材質" value="<%= spot.floor %>" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="opentime" id="lastname_review" type="text" placeholder="開放時間，ex.晚上有開燈嗎?" value="<%= spot.opentime %>" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="shop" id="lastname_review" type="text" placeholder="附近好吃好玩 ex.附近推薦美食、推薦行程?" value="<%= spot.shop %>" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<input name="googleMap" type="text" placeholder="Google Map 定位連結，協助導航點" value="<%= spot.googleMap %>" class="form-control">
+													</div>
+													<div id="current">
+													</div>				
+												</div>										
+												<div class="col-md-9">
+													<div class="form-group">
+														<label>ex.滑板地圖</label>
+														<input name="sharer" id="lastname_review" type="text" placeholder="首位板點回報人（歡迎所有滑板人板店教練選手）" value="<%= spot.sharer %>" class="form-control">
+													</div>
+												</div>
+												<div class="col-md-9">
+													<div class="form-group">
+														<label>IG連結：https://www.instagram.com/ID</label>
+														<input name="op1" id="lastname_review" type="text" placeholder="讓板友們認識你! Instagram/fb/twitter/web連結" value="<%= spot.op1 %>" class="form-control">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 新增更多詳細資料END -->
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+							<div class="col-md-12">
+								<!-- <label>Human verification</label> -->
+								<!-- <div class="g-recaptcha col-md-12" data-sitekey="6LdzH40iAAAAAFkclvFYdsMWsVq5nL6HpZgsINsu"></div><br>  
+								<small><p>這個網站採用 Google reCAPTCHA 保護機制，這項服務遵循 Google <a href="https://policies.google.com/privacy">隱私權政策</a>及<a href="https://policies.google.com/terms">服務條款</a>。</p></small>         -->
+				
+								<input type="submit" value="提交" class="btn_1 green" id="">
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End basic-details Popup -->
+	<!-- GET lat/lng -->
+	<script>
+		var spot = document.getElementById('spotData').getAttribute('data-spot');
+		var Spot = JSON.parse(spot);
+
+		var map = new google.maps.Map(document.getElementById('map_canvas'), {
+			zoom: 12,
+			center: new google.maps.LatLng(Spot.lat, Spot.lon),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+		
+		var myMarker = new google.maps.Marker({
+			position: new google.maps.LatLng(Spot.lat, Spot.lon),
+			draggable: true
+		});
+
+		google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+			document.getElementById('current').innerHTML = '<input name="lat" placeholder="經度" type="hidden" class="form-control" value=" ' + evt.latLng.lat().toFixed(6) + '"> <input name="lon" placeholder="緯度" type="hidden" class="form-control" value=" ' + evt.latLng.lng().toFixed(6) + '">';
+		});
+		
+		google.maps.event.addListener(myMarker, 'dragstart', function (evt) {
+			document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+		});
+		
+		map.setCenter(myMarker.position);
+		myMarker.setMap(map);
+
+	</script>
+	<!-- GET lat/lng END -->	
+
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+	<!-- Date and time pickers -->
+    <script>
+    $(function() {
+      $('input.date-pick').daterangepicker({
+          autoUpdateInput: true,
+          parentEl:'.scroll-fix',
+          singleDatePicker: true,
+          autoApply: true,
+          minDate:new Date(),
+          showCustomRangeLabel: false,
+          locale: {
+            format: 'MM-DD-YYYY'
+          }
+          }, function(start, end, label) {
+          console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('DD-MM-YYYY') + ' (predefined range: ' + label + ')');
+        });
+      $('input.time-pick').timepicker({
+            appendWidgetTo: '.scroll-fix-time',
+            minuteStep: 15,
+            showInpunts: false
+        })
+    });
+    </script>
+
+	<!--Review modal validation -->
+	<script src="map/assets/validate.js"></script>
+
+	<!-- Fixed sidebar -->
+	<script src="map/js/theia-sticky-sidebar.js"></script>
+	<script>
+		jQuery('#sidebar').theiaStickySidebar({
+			additionalMarginTop: 80
+		});
+	</script>
+
+	<script>
+		if ($('.prod-tabs .tab-btn').length) {
+			$('.prod-tabs .tab-btn').on('click', function (e) {
+				e.preventDefault();
+				var target = $($(this).attr('href'));
+				$('.prod-tabs .tab-btn').removeClass('active-btn');
+				$(this).addClass('active-btn');
+				$('.prod-tabs .tab').fadeOut(0);
+				$('.prod-tabs .tab').removeClass('active-tab');
+				$(target).fadeIn(500);
+				$(target).addClass('active-tab');
+			});
+
+		}
+	</script>
+
+	<!-- Masonry filter -->
+	<script src="map/js/isotope.min.js"></script>
+	<script>
+	$(window).on('load',function(){
+		var $container = $('.isotope-wrapper'),
+			filters = {};
+
+		$container.isotope({
+		itemSelector : '.isotope-item'
+		});
+
+		$('.styled-select-filters select').change(function(){
+			var $this = $(this);
+			var group = $this.attr('data-filter-group');      
+			filters[ group ] = $this.find(':selected').attr('data-filter-value');
+			var isoFilters = [];
+			for ( var prop in filters ) {
+				isoFilters.push( filters[ prop ] )
+			}
+			var selector = isoFilters.join('');
+			$container.isotope({ filter: selector });
+			return false;
+			});
+	});
+	</script>	
+	
+
+</body>
+
+</html>

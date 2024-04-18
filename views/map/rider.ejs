@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-TW">                                 
+
+<head>
+	<base href="/">
+	<%- include('share/head') %>
+
+	<meta name="application-name" content="滑板地圖SpotsMap">
+	<meta property="og:site_name" content="滑板地圖SpotsMap">
+	<meta name="author" content="滑板地圖SpotsMap">
+	<meta property="article:author" content="https://wakudesign.com/skateboard.map.spot">
+
+	<title><%= rider.athlete %> | 滑板運動員 | 滑板地圖SpotsMap</title>
+
+	<meta name="description" content="<%= rider.athlete %>,出生年<%= rider.age %>,Instagram<%= rider.Insta %>,站姿<%= rider.stance %>,家鄉<%= rider.hometown %>,全球排名<%= rider.GlobalRank %>,奧運排名<%= rider.OlympicRank %>,台灣排名<%= rider.TWRank %>,近兩年Street排名<%= rider.twoYearsStreet %>,近兩年Park排名<%= rider.twoYearsPark %>,近兩年Vert排名<%= rider.twoYearsVert %>,歷史綜合排名<%= rider.alltimeOverall %>,歷史Street排名<%= rider.alltimeStreet %>,歷史Park排名<%= rider.alltimePark %>,贊助商<%= rider.sponsors %>,性別<%= rider.gender %>,教練團<%= rider.coach %>,參賽紀錄<%= rider.history %>">
+	<meta name="keywords" content="滑板選手, 奧運國手, 積分排名, 台灣積分賽排名">
+	<meta name="url" itemprop="url" content="https://wakudesign.com/skateboard.map.spot/rider/<%= rider.id %>">
+	<meta property="og:url"                content="https://wakudesign.com/skateboard.map.spot/rider/<%= rider.id %>" />
+	<meta property="og:type"               content="profile" />
+	<meta property="og:title"              content="<%= rider.athlete %> | 滑板運動員 | 滑板地圖SpotsMap" />
+	<meta property="og:description" content="<%= rider.athlete %>,出生年<%= rider.age %>,Instagram<%= rider.Insta %>,站姿<%= rider.stance %>,家鄉<%= rider.hometown %>,全球排名<%= rider.GlobalRank %>,奧運排名<%= rider.OlympicRank %>,台灣排名<%= rider.TWRank %>,近兩年Street排名<%= rider.twoYearsStreet %>,近兩年Park排名<%= rider.twoYearsPark %>,近兩年Vert排名<%= rider.twoYearsVert %>,歷史綜合排名<%= rider.alltimeOverall %>,歷史Street排名<%= rider.alltimeStreet %>,歷史Park排名<%= rider.alltimePark %>,贊助商<%= rider.sponsors %>,性別<%= rider.gender %>,教練團<%= rider.coach %>,參賽紀錄<%= rider.history %>" />
+
+	<% if (rider.headshot) { %>
+		<meta property="og:image"              content="<%= rider.headshot %>" />
+	<% } else { %>
+		<meta property="og:image"              content="map/img/defultRider.jpg" />
+	<% } %>
+
+
+	<meta property="og:image:width"        content="800" />
+	<meta property="og:image:height"       content="800" />
+
+
+	<!-- SPECIFIC CSS -->
+	<link href="map/css/shop.css" rel="stylesheet">
+
+	<!-- SPECIFIC CSS - GRID GALLERY -->
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+	<!-- <link href="map/css/finaltilesgallery.css" rel="stylesheet"> -->
+	<!-- <link href="map/css/lightbox2.css" rel="stylesheet"> -->
+	
+	<style>
+		.descriptionForRider {
+			white-space: pre-wrap;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="preloader">
+		<div class="sk-spinner sk-spinner-wave">
+			<div class="sk-rect1"></div>
+			<div class="sk-rect2"></div>
+			<div class="sk-rect3"></div>
+			<div class="sk-rect4"></div>
+			<div class="sk-rect5"></div>
+		</div>
+	</div>
+	<!-- End Preload -->
+
+	<div class="layer"></div>
+	<!-- Mobile menu overlay mask -->
+
+	<!-- Header================================================== -->
+	<header>
+		<%- include('share/header') %>
+	</header>
+	<!-- End Header -->
+
+	<main>
+		<div id="position" style=" background-color: #dadce1;">
+			<div class="container" >
+				<ul>
+					<li><a href="/skateboard.map.spot">首頁</a>
+					</li>
+					<li><a href="/skateboard.map.spot/styles">找風格</a>
+					</li>
+					<li><a href="/skateboard.map.spot/style/"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End position -->
+
+		<div class="container margin_60">
+			<!-- <div class="banner_style">
+				<div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)" style="background-color: rgba(0, 0, 0, 0.3);">
+					<div>
+						<h3>Your Style<br>Your Statement<br></h3>
+						<p></p>
+						<a href="/skateboard.map.spot/styles" class="btn_1">回前頁Back</a>
+					</div>
+				</div>
+			</div> -->
+			<!-- /banner_2 -->
+
+			<div class="row">
+				<div class="col-lg-8">
+
+					<div class="product-details">
+                        
+						<div class="basic-details">
+							<div class="row">
+								<div class="image-column col-6 col-md-6 col-sm-6">
+									<% if( rider.headshot ) { %>
+										<figure class="image-box"><img src="<%= rider.headshot %>" loading="lazy"></figure>
+									<% } else { %>
+										<figure class="image-box"><img src="map/img/test.jpg" loading="lazy"></figure>
+									<% } %>
+								</div>
+								<% 
+									var currentYear = new Date().getFullYear();
+									var age = currentYear - rider.age;
+								%>
+								<div class="info-column col-6 col-md-6 col-sm-6" style="align-items: center; display: flex;">
+								  <!-- form1 start -->
+									<div class="details-header">
+										<b><%= rider.athlete %></b>
+										<br><br>
+										Age: <%= age %>
+										<br><br>
+										Insta: <a href="<%= rider.InstaLink %>" target="_blank"><%= rider.Insta %></a>
+										<!-- <br><br>
+										Stance: <%= rider.stance %>
+										<br><br>
+										HomeTown: <%= rider.hometown %> -->
+									</div>
+								  <!-- form1 end -->
+								</div>
+							</div>
+						</div>
+						<!--End Basic Details-->
+
+						<div class="main_title">
+							<h2><span style="color:#bf935e">綜合</span>個人排名</h2>
+							<p>Overall Individual Ranking</p>
+						</div>
+
+						<div class="row">
+							<div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+								<div class="feature">
+									<h3><span>奧運</span></h3>
+									<p>
+										<%= rider.OlympicRank %>
+									</p>
+								</div>
+							</div>
+							<div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>全球</span></h3>
+									<p>
+										<%= rider.GlobalRank %>
+									</p>
+								</div>
+							</div>
+							<div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>臺灣Street</span></h3>
+									<p>
+										<%= rider.twStreetRank %>
+									</p>
+								</div>
+							</div>
+							<div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>臺灣Park</span></h3>
+									<p>
+										<%= rider.twParkRank %>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+
+						<div class="row">
+							<!-- <div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+								<div class="feature">
+									<h3><span>2024奧運</span> Rank</h3>
+									<p>
+										<%= rider.OlympicRank %>
+									</p>
+									<h3><span>全球</span> Rank</h3>
+									<p>
+										<%= rider.GlobalRank %>
+									</p>
+									<h3><span>臺灣</span> Rank</h3>
+									<p>
+										<%= rider.TWRank %>
+									</p>
+								</div>
+							</div> -->
+							<div class="col-12 col-lg-12 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>贊助</span> Sponsors</h3>
+									<p class="descriptionForRider"><%- rider.sponsors %></p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">
+							<div class="col-lg-12 wow fadeIn" data-wow-delay="0.3s">
+								<div class="feature">
+									<h3><span>參賽紀錄</span> History</h3>
+									<p class="descriptionForRider"><%- rider.history %></p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<% if(rider.gender === "Male") { %>
+						<div class="main_title">
+							<h2><span style="color:#bf935e">兩年</span>男子全球排名</h2>
+							<p>Two Year Men's Global Ranking</p>
+						</div>
+						<% } else { %>
+						<div class="main_title">
+							<h2><span style="color:#bf935e">兩年</span>女子全球排名</h2>
+							<p>Two Year Women's Global Ranking</p>
+						</div>
+						<% } %>
+
+						<div class="row">
+							<div class="col-4 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+								<div class="feature">
+									<h3><span>Street</span></h3>
+									<p>
+										<%= rider.twoYearsStreet %>
+									</p>
+								</div>
+							</div>
+							<div class="col-4 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>Park</span></h3>
+									<p>
+										<%= rider.twoYearsPark %>
+									</p>
+								</div>
+							</div>
+							<div class="col-4 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>Vert</span></h3>
+									<p>
+										<%= rider.twoYearsVert %>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="main_title">
+							<h2><span style="color:#bf935e">歷史</span>全球排名</h2>
+							<p>All Time Global Ranking</p>
+						</div>
+
+						<div class="row">
+							<div class="col-4 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+								<div class="feature">
+									<h3><span>Street</span></h3>
+									<p>
+										<%= rider.alltimeStreet %>
+									</p>
+								</div>
+							</div>
+							<div class="col-4 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>Park</span></h3>
+									<p>
+										<%= rider.alltimePark %>
+									</p>
+								</div>
+							</div>
+							<div class="col-4 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>Vert</span></h3>
+									<p>
+										<%= rider.alltimeVert %>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">
+							<div class="col-lg-12 wow fadeIn" data-wow-delay="0.3s">
+								<div class="feature">
+									<h3><span>教練團</span> Coach</h3>
+									<p class="descriptionForRider"><%- rider.coach %></p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">
+							<div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+								<div class="feature">
+									<h3><span>Stance</span></h3>
+									<p>
+										<%= rider.stance %>
+									</p>
+								</div>
+							</div>
+							<div class="col-6 col-lg-6 wow fadeIn" data-wow-delay="0.2s">
+								<div class="feature">
+									<h3><span>Hometown</span></h3>
+									<p>
+										<%= rider.hometown %>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+
+						<a href="#" class="btn_full_outline" data-bs-toggle="modal" data-bs-target="#basicDetails">資訊更新Update</a>
+						<div class="main_title">
+							<p style=" font-size: 15px;">選手其他資訊如有更新，歡迎私訊滑板地圖IG:@twskateboardmap</p>
+						</div>
+						<!-- <a href="#" class="btn_1 add_bottom_30" data-bs-toggle="modal" data-bs-target="#basicDetails" style="background-color: #75889e; color: #ffffff;">更新</a> -->
+
+
+					</div>
+					<!--End Product-details-->
+				</div>
+				<!--End Col-->
+
+				<aside class="col-lg-4" id="sidebar">
+					<div class="theiaStickySidebar">
+						<div class="box_style_1" style="background-color: #eaedec;">
+							<h3 class="inner"></h3>
+							<div class="row">
+								<img alt="Image" class="image-box" src="map/img/banner-Media-2.png" >
+								<!-- <div class="col-9 " >
+									<h5></h5>
+									<p></p>
+								</div>
+							    <div class="col-3"> -->
+									<!-- <img alt="Image" class="sp-image" src="" > -->
+								<!-- </div> -->
+							</div>
+							<!-- <a class="btn_full_outline" href="/skateboard.map.spot/logout" target="_blank">登出Logout</a> -->
+						</div>
+						<!--/box_style_1 -->
+					</div>
+					<!--/sticky -->
+
+				</aside>
+
+			</div>
+		</div>
+		<!-- End Container -->
+	</main>
+	<!-- End main -->
+
+	<!-- Footer Start -->
+	<%- include('share/footer') %>
+	<!-- End footer -->
+
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- Common scripts -->
+	<script src="map/js/jquery-3.6.4.min.js"></script>
+	<script src="map/js/common_scripts_min.js"></script>
+	<script src="map/js/functions.js"></script>
+
+
+	<!-- Specific scripts - Grid gallery -->
+	<!-- <script src="map/js/jquery.finaltilesgallery.js"></script>
+	<script src="map/js/lightbox2.js"></script>
+	<script>
+		$(function () {
+			'use strict';
+			$(".final-tiles-gallery").finalTilesGallery({
+				minTileWidth: 1
+			});
+		});
+	</script> -->
+
+	<!-- Fixed sidebar -->
+	<script src="map/js/theia-sticky-sidebar.js"></script>
+	<script>
+		jQuery('#sidebar').theiaStickySidebar({
+			additionalMarginTop: 80
+		});
+	</script>
+
+	<!-- basic-details Popup -->
+	<div class="modal fade" id="basicDetails" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">資訊更新 Update</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+					<form method="post" action="/skateboard.map.spot/handleRiderEdit">
+						<input name="id" id="tour_name" type="hidden" value="<%= rider.id %>">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>贊助 Sponsors</label>
+									<textarea name="sponsors" class="form-control" style="height:100px" wrap="hard" cols="50" rows="5"><%= rider.sponsors %></textarea>
+								</div>
+								<div class="form-group">
+									<label>參賽紀錄 History</label>
+									<textarea name="history"  class="form-control" style="height:100px" wrap="hard" cols="50" rows="5"><%= rider.history %></textarea>
+								</div>
+								<div class="form-group">
+									<label>教練團 Coach</label>
+									<textarea name="coach" class="form-control" style="height:100px" wrap="hard" cols="50" rows="5"><%= rider.coach %></textarea>
+								</div>
+							</div>
+						</div>
+						<!-- End row -->
+						<div class="row">				
+							<input type="submit" value="確認更新" class="btn_1 green" id="" style="background-color: #75889e; color: #ffffff;">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End basic-details Popup -->
+	
+    
+	
+
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+@charset "UTF-8";
+/* CSS Custom */
+/*style.css 234*/
+a.sendCaptcha{
+    padding: 3px 10px;
+	font-size:13px;
+}
+
+.btn_checkout{
+    padding: 10px 8px;
+}
+
+.form-control::placeholder{
+    color: rgb(159, 157, 157)
+}
+
+.post_info span {
+	color:#daa972;
+}
+
+a.btn_2, .btn_2, a.btn_3, .btn_3{
+	background: #ebb174;
+}
+
+.tabs nav a:before {
+	color:#bba8bd;
+}
+
+a.social_bt.google {
+    background-color: #d2d0d24d;
+    font-weight:800;
+}
+a.social_bt {
+    color: #656464;
+}
+  
+
+ul#updated_cart_items{
+	padding:5px 0 0 0;
+	list-style:none;
+}
+ul#updated_cart_items li{
+	border-bottom:1px solid #ededed;
+	position:relative;
+	margin:0;
+	padding:5px 10px;
+	padding-bottom:10px;
+	width:100%;
+	clear:both;
+}
+ul#updated_cart_items li:last-child{
+	border-bottom:none;
+}
+ul#updated_cart_items li .image{
+   overflow:hidden;
+   width:50px;
+   height:50px;
+   float:left;
+   margin-right:10px;
+   -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+ul#updated_cart_items li .image img{
+  width:50px;
+  height:auto;
+}
+ul#updated_cart_items li strong {
+	font-weight:500;
+	float:left;
+	color:#999;
+	margin-top:10px;
+	float:left;
+	width:150px;
+	line-height: 1.4;
+}
+ul#updated_cart_items li strong > a{
+	color:#333;
+	display: block;
+}
+ul#updated_cart_items li strong > a:hover{
+	color:#e2c07b;
+}
+ul#updated_cart_items li a.action {
+	color: #999;
+	position: absolute;
+	right: 15px;
+	top: 5px;
+	width: 15px;
+	height: 15px;
+}
+ul#updated_cart_items li a.action i{
+	font-size: 14px;
+	text-shadow: none;
+	font-weight: normal;
+}
+ul#updated_cart_items li a.action:hover {
+	color:#333;
+	background:none;
+}
+ul#updated_cart_items li:last-child div{
+  color: #999;
+  text-align:right;
+  font-size:14px;
+  padding:10px 0 15px 0;
+  display:block;
+}
+ul#updated_cart_items li:last-child span{
+    color: #333;
+	font-weight:bold;
+	font-size:16px;
+}
+
+
+
+/* 預設情況下顯示電腦版table，隱藏手機版table */
+.desktop-table {
+    display: table;
+}
+
+.mobile-table {
+    display: none;
+}
+
+/* 當屏幕寬度小於或等於768px時，隱藏電腦版table，顯示手機版table */
+@media (max-width: 768px) {
+.desktop-table {
+    display: none;
+}
+
+.mobile-table {
+    display: table;
+}
+}
+
+
+@media (max-width: 991px) {
+    .sticky ul#top_tools, ul#top_tools  {
+		margin: 0 35px 0 0;
+	}
+
+    .dropdown.dropdown-cart {
+        top: 0px;
+        right: 15px; 
+        margin-right: 5px;
+	}
+    
+}
+
+@media (min-width: 769px) and (max-width: 979px) {
+    .sticky ul#top_tools, ul#top_tools  {
+		margin: 0 35px 0 0;
+	}
+
+    .dropdown.dropdown-cart {
+        top: 0px;
+        right: 15px; 
+        margin-right: 5px;
+	}
+    
+}
+
+@media (max-width: 768px) {
+    .sticky ul#top_tools, ul#top_tools  {
+		margin: 0 35px 0 0;
+	}
+
+    .dropdown.dropdown-cart {
+        top: 0px;
+        right: 15px; 
+        margin-right: 5px;
+	}
+    
+}
+
+@media (max-width: 767px) {
+    .sticky ul#top_tools, ul#top_tools  {
+		margin: 0 35px 0 0;
+	}
+
+    .dropdown.dropdown-cart {
+        top: 0px;
+        right: 15px; 
+        margin-right: 5px;
+	}
+    
+}
+
+@media (max-width: 480px) {
+    .sticky ul#top_tools, ul#top_tools  {
+		margin: 0 35px 0 0;
+	}
+
+    .dropdown.dropdown-cart {
+        top: -2px;
+        right: 15px; 
+        margin-right: 5px;
+	}
+    
+}
